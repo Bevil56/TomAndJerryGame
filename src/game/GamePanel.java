@@ -1,8 +1,8 @@
 package game;
 
 import state.GameStateManager;
-import util.KeyHandler;
-import util.MouseHandler;
+import utils.KeyHandler;
+import utils.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,8 +56,8 @@ public class GamePanel extends JPanel implements Runnable {
 
         initGraphics();
 
-        mouse = new MouseHandler();
-        key = new KeyHandler();
+        mouse = new MouseHandler(this);
+        key = new KeyHandler(this);
 
         stateManager = new GameStateManager();
     }
@@ -140,7 +140,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void render() {
         if (g2D != null) {
-            g2D.setColor(Color.GRAY);
+            g2D.setColor(Color.LIGHT_GRAY);
             g2D.fillRect(0, 0, width, height);
             stateManager.render(g2D);
         }

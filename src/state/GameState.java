@@ -1,7 +1,7 @@
 package state;
 
-import util.KeyHandler;
-import util.MouseHandler;
+import utils.KeyHandler;
+import utils.MouseHandler;
 
 import java.awt.*;
 
