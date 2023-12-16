@@ -1,5 +1,9 @@
 package game;
 
+import state.GameStateManager;
+import util.KeyHandler;
+import util.MouseHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -8,25 +12,20 @@ import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    public static final long serialVersionUID = 1L;
-
     public static int width;
     public static int height;
-    public static int oldFrameCount;
-    public static int oldTickCount;
-    public static int tickCount;
 
     private Thread thread;
     private boolean running = false;
 
     private BufferStrategy bs;
     private BufferedImage img;
-    private Graphics2D g;
+    private Graphics2D g2D;
 
-//    private MouseHandler mouse;
-//    private KeyHandler key;
-//
-//    private GameStateManager gsm;
+    private MouseHandler mouse;
+    private KeyHandler key;
+
+    private GameStateManager stateManager;
 
     public GamePanel(BufferStrategy bs, int width, int height) {
         GamePanel.width = width;
@@ -48,8 +47,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void initGraphics() {
         img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        g = (Graphics2D) img.getGraphics();
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2D = (Graphics2D) img.getGraphics();
+        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     }
 
     public void init() {
@@ -57,10 +56,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         initGraphics();
 
-//        mouse = new MouseHandler(this);
-//        key = new KeyHandler(this);
-//
-//        gsm = new GameStateManager(g);
+        mouse = new MouseHandler();
+        key = new KeyHandler();
+
+        stateManager = new GameStateManager();
     }
 
     public void run() {
@@ -87,8 +86,8 @@ public class GamePanel extends JPanel implements Runnable {
             double now = System.nanoTime();
             int updateCount = 0;
             while (((now - lastUpdateTime) > TIME_BEFORE_UPDATE) && (updateCount < MUST_UPDATE_BEFORE_RENDER)) {
-                update(now);
-//                input(mouse, key);
+                update();
+                input(mouse, key);
                 lastUpdateTime += TIME_BEFORE_UPDATE;
                 updateCount++;
                 tickCount++;
@@ -98,7 +97,7 @@ public class GamePanel extends JPanel implements Runnable {
                 lastUpdateTime = now - TIME_BEFORE_UPDATE;
             }
 
-//            input(mouse, key);
+            input(mouse, key);
 
             render();
             draw();
@@ -131,29 +130,25 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-        public void update(double time) {
-//        gsm.update(time);
+    public void update() {
+        stateManager.update();
     }
 
-//    public void input(MouseHandler mouse, KeyHandler key) {
-//        gsm.input(mouse, key);
-//    }
+    public void input(MouseHandler mouse, KeyHandler key) {
+        stateManager.input(mouse, key);
+    }
 
     public void render() {
-        if (g != null) {
-            g.setColor(new Color(33, 30, 39));
-            g.fillRect(0, 0, width, height);
-//            gsm.render(g);
+        if (g2D != null) {
+            g2D.setColor(Color.GRAY);
+            g2D.fillRect(0, 0, width, height);
+            stateManager.render(g2D);
         }
     }
 
     public void draw() {
-        do {
-            Graphics g2 = (Graphics) bs.getDrawGraphics();
-            g2.drawImage(img, 3, 26, width + 10, height + 10, null); // true 8, 31
-            g2.dispose();
-            bs.show();
-        } while(bs.contentsLost());
-        
+        Graphics g2 = (Graphics) this.getGraphics();
+        g2.drawImage(img, 0, 0, width , height , null);
+        g2.dispose();
     }
 }
