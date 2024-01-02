@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Spirte {
+public class Sprite {
     private BufferedImage spriteSheet = null;
     private BufferedImage[][] spriteArray;
     private final int TILE_SIZE = 32;
@@ -16,7 +16,7 @@ public class Spirte {
     private int height;
     private int spriteWidth;
     private int spriteHeight;
-    public Spirte(String file){
+    public Sprite(String file){
         width = TILE_SIZE;
         height = TILE_SIZE;
 
@@ -38,7 +38,7 @@ public class Spirte {
         return height;
     }
 
-    public Spirte(String file, int width, int height){
+    public Sprite(String file, int width, int height){
         this.width = width;
         this.height = height;
 

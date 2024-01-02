@@ -63,14 +63,14 @@ public class Font {
     }
 
     private BufferedImage loadFont(String file) {
-        BufferedImage sprite = null;
+        BufferedImage font = null;
         try {
-            sprite = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(file)));
+            font = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(file)));
         } catch (Exception e) {
             System.out.println("ERROR: could not load file: " + file);
         }
 
-        return sprite;
+        return font;
     }
 
     public void loadFontArray() {
@@ -88,12 +88,16 @@ public class Font {
     }
 
     public BufferedImage getLetter(int x, int y) {
-        BufferedImage img = FONTSHEET.getSubimage(x * width, y * heigth, width, heigth);
-        return img;
+        return FONTSHEET.getSubimage(x * width, y * heigth, width, heigth);
     }
 
-    public BufferedImage getLetter(char letter) {
-        int value = letter ;
+    public BufferedImage getFont(char letter) {
+        int value = 0;
+        if(letter >=65 && letter<=90)
+            value = letter - 65;
+        if(letter>=97 && letter<=122)
+            value = letter - 97 + 32;
+        System.out.println(value);
 
         int x = value % letterWidth;
         int y = value / letterWidth;
