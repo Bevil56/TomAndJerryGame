@@ -1,6 +1,6 @@
 package game;
 
-import state.GameStateManager;
+import states.GameStateManager;
 import utils.KeyHandler;
 import utils.MouseHandler;
 

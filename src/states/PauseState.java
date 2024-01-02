@@ -1,12 +1,12 @@
-package state;
+package states;
 
 import utils.KeyHandler;
 import utils.MouseHandler;
 
 import java.awt.*;
 
-public class GameOverState extends GameState {
-    public GameOverState(GameStateManager stateManager) {
+public class PauseState extends GameState {
+    public PauseState(GameStateManager stateManager) {
         super(stateManager);
     }
 

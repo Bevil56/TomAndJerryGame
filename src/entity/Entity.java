@@ -12,10 +12,10 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity {
 
-    private final int UP = 0;
-    private final int DOWN = 1;
-    private final int RIGHT = 2;
-    private final int LEFT = 3;
+    private final int UP = 3;
+    private final int DOWN = 2;
+    private final int RIGHT = 0;
+    private final int LEFT = 1;
 
     protected int currentAnimation;
 
@@ -32,9 +32,9 @@ public abstract class Entity {
     protected float dx;
     protected float dy;
 
-    protected float maxSpeed;
-    protected float acceleration;
-    protected float deceleration;
+    protected float maxSpeed = 4f;
+    protected float acceleration = 3f;
+    protected float deceleration = 0.2f;
 
     protected AABB hitBounds;
     protected AABB bounds;

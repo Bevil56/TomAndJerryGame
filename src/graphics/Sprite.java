@@ -77,10 +77,11 @@ public class Sprite {
         return sprite;
     }
     public void loadSpriteArray() {
-        spriteArray = new BufferedImage[spriteWidth][spriteHeight];
-        for (int x = 0 ; x < spriteWidth ; x++){
+        spriteArray = new BufferedImage[spriteHeight][spriteWidth];
+
             for (int y = 0 ; y < spriteHeight ; y++){
-                spriteArray[x][y] = getSprite(x,y);
+                for (int x = 0 ; x < spriteWidth ; x++){
+                spriteArray[y][x] = getSprite(x,y);
             }
         }
     }

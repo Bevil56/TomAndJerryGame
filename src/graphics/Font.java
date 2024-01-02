@@ -97,7 +97,6 @@ public class Font {
             value = letter - 65;
         if(letter>=97 && letter<=122)
             value = letter - 97 + 32;
-        System.out.println(value);
 
         int x = value % letterWidth;
         int y = value / letterWidth;

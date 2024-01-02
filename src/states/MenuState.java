@@ -1,4 +1,4 @@
-package state;
+package states;
 
 import utils.KeyHandler;
 import utils.MouseHandler;

@@ -1,4 +1,4 @@
-package state;
+package states;
 
 import game.GamePanel;
 import math.Vector2f;
