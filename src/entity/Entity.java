@@ -2,6 +2,7 @@ package entity;
 
 import graphics.Animation;
 import graphics.Sprite;
+import math.AABB;
 import math.Vector2f;
 import utils.KeyHandler;
 import utils.MouseHandler;
@@ -33,28 +34,64 @@ public abstract class Entity {
 
     protected float maxSpeed;
     protected float acceleration;
-    protected float deacceleration;
+    protected float deceleration;
+
+    protected AABB hitBounds;
+    protected AABB bounds;
+
 
     public Entity(Sprite sprite, Vector2f vector2f, int size) {
         this.sprite = sprite;
         pos = vector2f;
         this.size = size;
+
+        bounds = new AABB(vector2f, size, size);
+        hitBounds = new AABB(new Vector2f(vector2f.x + ((float) size / 2), vector2f.y), size, size);
+
         animation = new Animation();
         setAnimation(RIGHT,sprite.getSpriteArray(RIGHT),10);
     }
 
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
+    }
+
+    public void setAcceleration(float acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setDeceleration(float deceleration) {
+        this.deceleration = deceleration;
+    }
+
+    public AABB getBounds() {
+        return bounds;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+    public void setMaxSpeed(float maxSpeed){
+        this.maxSpeed = maxSpeed;
+    }
+    public int getSize() {
+        return size;
+    }
+    public Animation getAnimation(){
+        return animation;
+    }
     private void setAnimation(int i, BufferedImage[] frames, int delay) {
         currentAnimation = i;
         animation.setFrames(frames);
         animation.setDelay(delay);
     }
-    private void update(){
+    public void update(){
         animate();
         setHitBoxDirection();
         animation.update();
     }
 
-    private void animate() {
+    public void animate() {
         if(up){
             if (currentAnimation != UP || animation.getDelay() == -1){
                 setAnimation(UP,sprite.getSpriteArray(UP),5);
@@ -81,10 +118,26 @@ public abstract class Entity {
     }
 
     private void setHitBoxDirection() {
+        if (up){
+            hitBounds.setYOffset((float) -size / 2);
+            hitBounds.setXOffset((float) -size / 2);
+        }
+        else if (down){
+            hitBounds.setYOffset((float) size / 2);
+            hitBounds.setXOffset((float) -size / 2);
+        }
+        else if (left){
+            hitBounds.setXOffset((float) -size);
+            hitBounds.setYOffset(0);
+        }
+        else if (right){
+            hitBounds.setYOffset(0);
+            hitBounds.setXOffset(0);
+        }
     }
 
     public abstract void render(Graphics2D g2D);
     public void input(MouseHandler mouse, KeyHandler key) {
-        
+
     }
 }
