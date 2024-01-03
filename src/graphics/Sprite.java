@@ -5,20 +5,19 @@ import math.Vector2f;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Sprite {
     private BufferedImage spriteSheet = null;
     private BufferedImage[][] spriteArray;
-    private final int TILE_SIZE = 32;
+    private int tileSize = 32;
     private int width;
     private int height;
     private int spriteWidth;
     private int spriteHeight;
     public Sprite(String file){
-        width = TILE_SIZE;
-        height = TILE_SIZE;
+        width = tileSize;
+        height = tileSize;
 
         System.out.println("Loading: " + file +"...");
 
@@ -52,6 +51,14 @@ public class Sprite {
         loadSpriteArray();
     }
 
+    public void setTileSize(int newSize) {
+        tileSize = newSize;
+        width = tileSize;
+        height = tileSize;
+        spriteWidth = spriteSheet.getWidth() / width;
+        spriteHeight = spriteSheet.getHeight() / height;
+        loadSpriteArray();
+    }
     public void setSize(int width,int height) {
         setWidth(width);
         setHeight(height);

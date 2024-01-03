@@ -7,8 +7,8 @@ import utils.MouseHandler;
 
 import java.awt.*;
 
-public class Player extends Entity{
-    public Player(Sprite sprite, Vector2f vector2f, int size) {
+public class Jerry extends Entity{
+    public Jerry(Sprite sprite, Vector2f vector2f, int size) {
         super(sprite, vector2f, size);
     }
     public void move() {
@@ -80,7 +80,7 @@ public class Player extends Entity{
     }
     public void input(MouseHandler mouse, KeyHandler key){
         if (mouse.getButton() == 1){
-            System.out.println("Player: "+ pos.x + ","+ pos.y);
+            System.out.println("Jerry: "+ pos.x + ","+ pos.y);
         }
         up = key.up.down;
         down = key.down.down;

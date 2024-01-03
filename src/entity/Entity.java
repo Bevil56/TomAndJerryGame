@@ -12,10 +12,10 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity {
 
-    private final int UP = 3;
+    private final int LEFT = 0;
+    private final int RIGHT = 1;
     private final int DOWN = 2;
-    private final int RIGHT = 0;
-    private final int LEFT = 1;
+    private final int UP = 3;
 
     protected int currentAnimation;
 
@@ -32,9 +32,9 @@ public abstract class Entity {
     protected float dx;
     protected float dy;
 
-    protected float maxSpeed = 4f;
-    protected float acceleration = 3f;
-    protected float deceleration = 0.2f;
+    protected float maxSpeed = 3f;
+    protected float acceleration = 2f;
+    protected float deceleration = 0.5f;
 
     protected AABB hitBounds;
     protected AABB bounds;
@@ -94,22 +94,22 @@ public abstract class Entity {
     public void animate() {
         if(up){
             if (currentAnimation != UP || animation.getDelay() == -1){
-                setAnimation(UP,sprite.getSpriteArray(UP),5);
+                setAnimation(UP,sprite.getSpriteArray(UP),3);
             }
         }
         else if(down){
             if (currentAnimation != DOWN || animation.getDelay() == -1){
-                setAnimation(DOWN,sprite.getSpriteArray(DOWN),5);
+                setAnimation(DOWN,sprite.getSpriteArray(DOWN),3);
             }
         }
         else if(left){
             if (currentAnimation != LEFT || animation.getDelay() == -1){
-                setAnimation(LEFT,sprite.getSpriteArray(LEFT),5);
+                setAnimation(LEFT,sprite.getSpriteArray(LEFT),3);
             }
         }
         else if(right){
             if (currentAnimation != RIGHT || animation.getDelay() == -1){
-                setAnimation(RIGHT,sprite.getSpriteArray(RIGHT),5);
+                setAnimation(RIGHT,sprite.getSpriteArray(RIGHT),3);
             }
         }
         else {
