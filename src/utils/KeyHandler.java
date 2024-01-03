@@ -66,10 +66,10 @@ public class KeyHandler implements KeyListener {
     }
 
     public void toggle(KeyEvent e, boolean pressed) {
-        if(e.getKeyCode() == KeyEvent.VK_W) up.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_S) down.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_A) left.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_D) right.toggle(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP ) up.toggle(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) down.toggle(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) left.toggle(pressed);
+        if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) right.toggle(pressed);
         if(e.getKeyCode() == KeyEvent.VK_SPACE) attack.toggle(pressed);
         if(e.getKeyCode() == KeyEvent.VK_E) menu.toggle(pressed);
         if(e.getKeyCode() == KeyEvent.VK_ENTER) enter.toggle(pressed);

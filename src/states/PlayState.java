@@ -32,6 +32,7 @@ public class PlayState extends GameState {
     @Override
     public void input(MouseHandler mouse, KeyHandler key) {
         jerry.input(mouse, key);
+        tom.input(mouse, key);
     }
 
     @Override

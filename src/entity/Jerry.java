@@ -79,9 +79,6 @@ public class Jerry extends Entity{
         g2D.drawImage(animation.getImage(),(int) (pos.x), (int) (pos.y), size, size, null);
     }
     public void input(MouseHandler mouse, KeyHandler key){
-        if (mouse.getButton() == 1){
-            System.out.println("Jerry: "+ pos.x + ","+ pos.y);
-        }
         up = key.up.down;
         down = key.down.down;
         left = key.left.down;
