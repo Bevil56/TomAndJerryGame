@@ -6,27 +6,20 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Sprite {
     private BufferedImage spriteSheet = null;
     private BufferedImage[][] spriteArray;
-    private int tileSize = 32;
+    private int tileSize;
     private int width;
     private int height;
     private int spriteWidth;
     private int spriteHeight;
     public Sprite(String file){
-        width = tileSize;
-        height = tileSize;
-
         System.out.println("Loading: " + file +"...");
-
         spriteSheet = loadSpriteSheet(file);
-
-        spriteWidth = spriteSheet.getWidth()/width;
-        spriteHeight = spriteSheet.getHeight()/height;
-
-        loadSpriteArray();
+        setTileSize(32);
     }
 
     public int getWidth() {
@@ -45,16 +38,21 @@ public class Sprite {
 
         spriteSheet = loadSpriteSheet(file);
 
-        spriteWidth = spriteSheet.getWidth()/width;
-        spriteHeight = spriteSheet.getHeight()/height;
-
-        loadSpriteArray();
+        setTileSize(32, width, height);
     }
 
-    public void setTileSize(int newSize) {
-        tileSize = newSize;
+    public void setTileSize(int tileSize) {
+        this.tileSize = tileSize;
         width = tileSize;
         height = tileSize;
+        spriteWidth = spriteSheet.getWidth() / width;
+        spriteHeight = spriteSheet.getHeight() / height;
+        loadSpriteArray();
+    }
+    public void setTileSize(int tileSize, int width, int height) {
+        this.tileSize = tileSize;
+        this.width = width;
+        this.height = height;
         spriteWidth = spriteSheet.getWidth() / width;
         spriteHeight = spriteSheet.getHeight() / height;
         loadSpriteArray();
@@ -77,7 +75,7 @@ public class Sprite {
     private BufferedImage loadSpriteSheet(String file) {
         BufferedImage sprite = null;
         try{
-            sprite = ImageIO.read(getClass().getClassLoader().getResourceAsStream(file));
+            sprite = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(file)));
         }catch (Exception e){
             System.out.println("ERROR: could not load file: " + file);
         }

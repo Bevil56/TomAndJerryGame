@@ -92,11 +92,7 @@ public class Font {
     }
 
     public BufferedImage getFont(char letter) {
-        int value = 0;
-        if(letter >=65 && letter<=90)
-            value = letter - 65;
-        if(letter>=97 && letter<=122)
-            value = letter - 97 + 32;
+        int value = letter;
 
         int x = value % letterWidth;
         int y = value / letterWidth;

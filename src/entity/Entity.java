@@ -32,9 +32,9 @@ public abstract class Entity {
     protected float dx;
     protected float dy;
 
-    protected float maxSpeed = 3f;
-    protected float acceleration = 2f;
-    protected float deceleration = 0.5f;
+    protected float maxSpeed = 2f;
+    protected float acceleration = 1f;
+    protected float deceleration = 0.3f;
 
     protected AABB hitBounds;
     protected AABB bounds;
@@ -94,22 +94,22 @@ public abstract class Entity {
     public void animate() {
         if(up){
             if (currentAnimation != UP || animation.getDelay() == -1){
-                setAnimation(UP,sprite.getSpriteArray(UP),3);
+                setAnimation(UP,sprite.getSpriteArray(UP),8);
             }
         }
         else if(down){
             if (currentAnimation != DOWN || animation.getDelay() == -1){
-                setAnimation(DOWN,sprite.getSpriteArray(DOWN),3);
+                setAnimation(DOWN,sprite.getSpriteArray(DOWN),8);
             }
         }
         else if(left){
             if (currentAnimation != LEFT || animation.getDelay() == -1){
-                setAnimation(LEFT,sprite.getSpriteArray(LEFT),3);
+                setAnimation(LEFT,sprite.getSpriteArray(LEFT),8);
             }
         }
         else if(right){
             if (currentAnimation != RIGHT || animation.getDelay() == -1){
-                setAnimation(RIGHT,sprite.getSpriteArray(RIGHT),3);
+                setAnimation(RIGHT,sprite.getSpriteArray(RIGHT),8);
             }
         }
         else {

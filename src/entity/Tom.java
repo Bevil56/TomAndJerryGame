@@ -13,10 +13,15 @@ public class Tom extends Entity{
         sprite.setTileSize(64);
     }
     public void move() {
-        if(up) {
+        if(up && !left && !right) {
             dy -= acceleration;
             if(dy < -maxSpeed) {
                 dy = -maxSpeed;
+            }
+        } else if(down && !left && !right) {
+            dy += acceleration;
+            if(dy > maxSpeed) {
+                dy = maxSpeed;
             }
         } else {
             if(dy < 0) {
@@ -24,16 +29,7 @@ public class Tom extends Entity{
                 if(dy > 0) {
                     dy = 0;
                 }
-            }
-        }
-
-        if(down) {
-            dy += acceleration;
-            if(dy > maxSpeed) {
-                dy = maxSpeed;
-            }
-        } else {
-            if(dy > 0) {
+            } else if (dy > 0) {
                 dy -= deceleration;
                 if(dy < 0) {
                     dy = 0;
@@ -41,10 +37,15 @@ public class Tom extends Entity{
             }
         }
 
-        if(left) {
+        if(left && !up && !down) {
             dx -= acceleration;
             if(dx < -maxSpeed) {
                 dx = -maxSpeed;
+            }
+        } else if(right && !up && !down) {
+            dx += acceleration;
+            if(dx > maxSpeed) {
+                dx = maxSpeed;
             }
         } else {
             if(dx < 0) {
@@ -52,16 +53,7 @@ public class Tom extends Entity{
                 if(dx > 0) {
                     dx = 0;
                 }
-            }
-        }
-
-        if(right) {
-            dx += acceleration;
-            if(dx > maxSpeed) {
-                dx = maxSpeed;
-            }
-        } else {
-            if(dx > 0) {
+            } else if (dx > 0) {
                 dx -= deceleration;
                 if(dx < 0) {
                     dx = 0;
