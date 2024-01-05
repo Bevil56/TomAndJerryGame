@@ -1,7 +1,7 @@
 package tile;
 
 import graphics.Sprite;
-import math.Vector2f;
+import utils.Vector2f;
 import tile.blocks.Block;
 import tile.blocks.HoleBlock;
 import tile.blocks.ObjBlock;
@@ -42,9 +42,16 @@ public class TileMapObj extends TileMap {
                                 tileHeight
                         );
                     }
-                    tmo_blocks.put(i + ", " + j, tempBlock);
+                    tmo_blocks.put(i + "," + j, tempBlock);
                 }
             }
+        }
+        for (int j = 0; j < height; j++) {
+            Block tempBlock1 = new ObjBlock(new Vector2f(-tileWidth, j * tileHeight), tileWidth, tileHeight);
+            tmo_blocks.put(-1 + "," + j, tempBlock1);
+
+            Block tempBlock2 = new ObjBlock(new Vector2f((width + 1) * tileWidth, j * tileHeight), tileWidth, tileHeight);
+            tmo_blocks.put((width + 1) + "," + j, tempBlock2);
         }
     }
 

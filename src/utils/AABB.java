@@ -1,8 +1,12 @@
-package math;
+package utils;
 
 import entity.Entity;
+import game.GamePanel;
+import tile.TileMapObj;
+import tile.blocks.Block;
+import tile.blocks.HoleBlock;
 
-public class AABB {
+public class    AABB {
     private Vector2f pos;
     private float xOffset;
     private float yOffset;
@@ -95,5 +99,47 @@ public class AABB {
             return true;
         }
         return false;
+    }
+    public boolean collisionTile(float ax, float ay){
+        for (int c = 0; c < 4 ; c++){
+            int xt = (int) ((pos.x + ax) + (c % 2) * width + xOffset) / 32;
+            if(pos.x < 0){
+                xt = ((int) (((pos.x + ax) + (c % 2) * width + xOffset)) / 32) - 1;
+            }
+            int yt = (int) ((pos.y + ay) + (int)(c / 2) * height + yOffset) / 32;
+            if(TileMapObj.tmo_blocks.containsKey(String.valueOf(xt) + "," + String.valueOf(yt))) {
+                Block block = TileMapObj.tmo_blocks.get(String.valueOf(xt) + "," + String.valueOf(yt));
+                if (block instanceof HoleBlock) {
+                    collisionHole(ax, ay, xt, yt, block);
+                }
+                return block.update(this);
+            }
+        }
+        return false;
+}
+
+    private boolean collisionHole(float ax, float ay, float xt, float yt, Block block) {
+        int nextXt = (int) (((pos.x + ax) + xOffset) / 32 + width / 32);
+        int nextYt = (int) (((pos.x + ay) + yOffset) / 32 + height / 32);
+        if((nextXt == yt + 1) || nextYt == xt + 1){
+            if(TileMapObj.tmo_blocks.containsKey(String.valueOf(nextXt) + "," + String.valueOf(nextYt))){
+                Block nextBlock = TileMapObj.tmo_blocks.get(String.valueOf(nextXt) + "," + String.valueOf(nextYt));
+                return nextBlock.update(this);
+            }
+        else {
+            if(block.isInside(this)){}
+                return block.update(this);
+            }
+        }
+        return false;
+    }
+
+
+    public float getXOffset() {
+        return xOffset;
+    }
+
+    public float getYOffset() {
+        return yOffset;
     }
 }

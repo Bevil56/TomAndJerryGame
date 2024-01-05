@@ -4,7 +4,7 @@ import entity.Jerry;
 import entity.Tom;
 import game.GamePanel;
 import graphics.Sprite;
-import math.Vector2f;
+import utils.Vector2f;
 import tile.TileManager;
 import utils.KeyHandler;
 import utils.MouseHandler;
@@ -23,7 +23,7 @@ public class PlayState extends GameState {
         super(stateManager);
         tm = new TileManager("tile/map.xml");
         font = new Font("font/font.png",10,10);
-        jerry = new Jerry(new Sprite("entity/jerry_animation_4.png"), new Vector2f(300,300), 32);
+        jerry = new Jerry(new Sprite("entity/jerry_animation_4.png"), new Vector2f(400,400), 32);
         tom = new Tom(new Sprite("entity/tom_animation_3.png"), new Vector2f(400,400), 64);
     }
 

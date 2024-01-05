@@ -78,9 +78,11 @@ public class TileManager {
 //                System.out.println(imagePath + " " + width + " " + height + " " + tileCount + " " + tileColumns + " " +layers);
 //                System.out.println("--------------------------------\n" + data[i]);
 
+
                 if(i >= 1) {
                     tm.add(new TileMapNorm(data[i], sprite, width, height, blockWidth, blockHeight, tileColumns));
-                } else {
+                }
+                else {
                     tm.add(new TileMapObj(data[i], sprite, width, height, blockWidth, blockHeight, tileColumns));
                 }
             }

@@ -2,8 +2,8 @@ package entity;
 
 import graphics.Animation;
 import graphics.Sprite;
-import math.AABB;
-import math.Vector2f;
+import utils.AABB;
+import utils.Vector2f;
 import utils.KeyHandler;
 import utils.MouseHandler;
 
@@ -35,6 +35,8 @@ public abstract class Entity {
     protected float maxSpeed = 2f;
     protected float acceleration = 1f;
     protected float deceleration = 0.3f;
+    protected float diagonalFactor = 0.7071f;
+
 
     protected AABB hitBounds;
     protected AABB bounds;
@@ -120,14 +122,14 @@ public abstract class Entity {
     private void setHitBoxDirection() {
         if (up){
             hitBounds.setYOffset((float) -size / 2);
-            hitBounds.setXOffset((float) -size / 2);
+            hitBounds.setXOffset(((float) -size / 2));
         }
         else if (down){
             hitBounds.setYOffset((float) size / 2);
-            hitBounds.setXOffset((float) -size / 2);
+            hitBounds.setXOffset(((float) -size / 2));
         }
         else if (left){
-            hitBounds.setXOffset((float) -size);
+            hitBounds.setXOffset(-size);
             hitBounds.setYOffset(0);
         }
         else if (right){

@@ -1,6 +1,6 @@
 package graphics;
 
-import math.Vector2f;
+import utils.Vector2f;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

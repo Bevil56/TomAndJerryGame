@@ -1,7 +1,7 @@
 package tile.blocks;
 
-import math.AABB;
-import math.Vector2f;
+import utils.AABB;
+import utils.Vector2f;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,12 +13,17 @@ public abstract class Block {
     public BufferedImage img;
     public Vector2f pos;
 
+    public Block(Vector2f pos, int w, int h) {
+        this.pos = pos;
+        this.w = w;
+        this.h = h;
+    }
+
     public Block(BufferedImage img, Vector2f pos, int w, int h) {
         this.img = img;
         this.pos = pos;
         this.w = w;
         this.h = h;
-        System.out.println((int) pos.x +" " + (int) pos.y);
     }
 
     public int getWidth() { return w; }

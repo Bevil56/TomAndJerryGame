@@ -1,7 +1,7 @@
 package tile.blocks;
 
-import math.AABB;
-import math.Vector2f;
+import utils.AABB;
+import utils.Vector2f;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,12 +13,17 @@ public class HoleBlock extends Block {
 
     @Override
     public boolean update(AABB p) {
+        System.out.println("I am a hole");
         return false;
     }
 
     @Override
     public boolean isInside(AABB p) {
-        return false;
+        if(p.getPos().x + p.getXOffset() < pos.x) return false;
+        if(p.getPos().y + p.getYOffset() < pos.y) return false;
+        if(w + pos.x < p.getWidth() + (p.getPos().x + p.getXOffset())) return false;
+        if(h + pos.y < p.getHeight() + (p.getPos().y + p.getYOffset())) return false;
+        return true;
     }
 
     @Override

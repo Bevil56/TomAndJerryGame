@@ -1,7 +1,7 @@
 package entity;
 
 import graphics.Sprite;
-import math.Vector2f;
+import utils.Vector2f;
 import utils.KeyHandler;
 import utils.MouseHandler;
 

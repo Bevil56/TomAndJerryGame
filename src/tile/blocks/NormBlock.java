@@ -1,7 +1,7 @@
 package tile.blocks;
 
-import math.AABB;
-import math.Vector2f;
+import utils.AABB;
+import utils.Vector2f;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

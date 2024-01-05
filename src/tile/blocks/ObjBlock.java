@@ -1,12 +1,16 @@
 package tile.blocks;
 
-import math.AABB;
-import math.Vector2f;
+import utils.AABB;
+import utils.Vector2f;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class ObjBlock extends Block {
+    public ObjBlock(Vector2f pos, int w, int h) {
+        super(pos, w, h);
+    }
+
     public ObjBlock(BufferedImage img, Vector2f pos, int w, int h) {
         super(img, pos, w, h);
     }
