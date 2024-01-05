@@ -72,9 +72,12 @@ public class Tom extends Entity{
         g2D.drawImage(animation.getImage(),(int) (pos.x), (int) (pos.y), size, size, null);
     }
     public void input(MouseHandler mouse, KeyHandler key){
-        up = key.up.down;
-        down = key.down.down;
-        left = key.left.down;
-        right = key.right.down;
+//        if(mouse.getButton() == 1){
+//            System.out.println("Tom: " + pos.x + " " + pos.y);
+//        }
+//        up = key.up.down;
+//        down = key.down.down;
+//        left = key.left.down;
+//        right = key.right.down;
     }
 }

@@ -83,7 +83,6 @@ public class Sprite {
     }
     public void loadSpriteArray() {
         spriteArray = new BufferedImage[spriteHeight][spriteWidth];
-
             for (int y = 0 ; y < spriteHeight ; y++){
                 for (int x = 0 ; x < spriteWidth ; x++){
                 spriteArray[y][x] = getSprite(x,y);
