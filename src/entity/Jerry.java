@@ -119,17 +119,33 @@ public class Jerry extends Entity{
     }
     public void update(){
         super.update();
-        move();
-        if(!bounds.collisionTile(dx, 0)){
-            if(pos.x + dx >= 0 && pos.x + dx + bounds.getWidth() * 2 <= GamePanel.width) {
-                pos.x += dx;
+        if(!fallen) {
+            move();
+            if (!tileCollision.collisionTile(dx, 0)) {
+                if (pos.x + dx >= 0 && pos.x + dx + bounds.getWidth() * 2 <= GamePanel.width) {
+                    pos.x += dx;
+                }
+            }
+
+            if (!tileCollision.collisionTile(0, dy)) {
+                pos.y += dy;
+            }
+        }else{
+            if(animation.hasPlayedOnce()){
+                resetPosition();
+                fallen = false;
             }
         }
-
-        if(!bounds.collisionTile(0, dy)){
-                pos.y += dy;
-        }
     }
+
+    private void resetPosition() {
+        System.out.println("Reseting Player...");
+        pos.x = 50;
+        pos.y = 50;
+
+        setAnimation(DOWN,sprite.getSpriteArray(DOWN),8);
+    }
+
     @Override
     public void render(Graphics2D g2D) {
         g2D.setColor(Color.BLUE);
@@ -137,9 +153,13 @@ public class Jerry extends Entity{
         g2D.drawImage(animation.getImage(),(int) (pos.x), (int) (pos.y), size, size, null);
     }
     public void input(MouseHandler mouse, KeyHandler key){
-        up = key.up.down;
-        down = key.down.down;
-        left = key.left.down;
-        right = key.right.down;
+        if(!fallen) {
+            up = key.up.down;
+            down = key.down.down;
+            left = key.left.down;
+            right = key.right.down;
+        }else{
+            up = down = left = right = false;
+        }
     }
 }

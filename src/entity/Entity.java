@@ -2,20 +2,18 @@ package entity;
 
 import graphics.Animation;
 import graphics.Sprite;
-import utils.AABB;
-import utils.Vector2f;
-import utils.KeyHandler;
-import utils.MouseHandler;
+import utils.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
 
-    private final int LEFT = 0;
-    private final int RIGHT = 1;
-    private final int DOWN = 2;
-    private final int UP = 3;
+    protected final int LEFT = 0;
+    protected final int RIGHT = 1;
+    protected final int DOWN = 2;
+    protected final int UP = 3;
+    protected final int FALLEN = 4;
 
     protected int currentAnimation;
 
@@ -28,6 +26,8 @@ public abstract class Entity {
     protected boolean down;
     protected boolean left;
     protected boolean right;
+    protected boolean fallen;
+
 
     protected float dx;
     protected float dy;
@@ -40,7 +40,7 @@ public abstract class Entity {
 
     protected AABB hitBounds;
     protected AABB bounds;
-
+    protected TileCollision tileCollision;
 
     public Entity(Sprite sprite, Vector2f vector2f, int size) {
         this.sprite = sprite;
@@ -51,7 +51,9 @@ public abstract class Entity {
         hitBounds = new AABB(new Vector2f(vector2f.x + ((float) size / 2), vector2f.y), size, size);
 
         animation = new Animation();
-        setAnimation(RIGHT,sprite.getSpriteArray(RIGHT),10);
+        setAnimation(DOWN,sprite.getSpriteArray(DOWN),10);
+
+        tileCollision = new TileCollision(this);
     }
 
     public void setSprite(Sprite sprite) {
@@ -76,13 +78,20 @@ public abstract class Entity {
     public void setMaxSpeed(float maxSpeed){
         this.maxSpeed = maxSpeed;
     }
+    public boolean isFallen() {
+        return fallen;
+    }
+
+    public void setFallen(boolean fallen) {
+        this.fallen = fallen;
+    }
     public int getSize() {
         return size;
     }
     public Animation getAnimation(){
         return animation;
     }
-    private void setAnimation(int i, BufferedImage[] frames, int delay) {
+    public void setAnimation(int i, BufferedImage[] frames, int delay) {
         currentAnimation = i;
         animation.setFrames(frames);
         animation.setDelay(delay);
@@ -114,12 +123,17 @@ public abstract class Entity {
                 setAnimation(RIGHT,sprite.getSpriteArray(RIGHT),8);
             }
         }
+        else if(fallen){
+            if (currentAnimation != FALLEN || animation.getDelay() == -1){
+                setAnimation(FALLEN,sprite.getSpriteArray(FALLEN),5);
+            }
+        }
         else {
             setAnimation(currentAnimation, sprite.getSpriteArray(currentAnimation),-1);
         }
     }
 
-    private void setHitBoxDirection() {
+    public void setHitBoxDirection() {
         if (up){
             hitBounds.setYOffset((float) -size / 2);
             hitBounds.setXOffset(((float) -size / 2));

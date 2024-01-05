@@ -23,7 +23,7 @@ public class PlayState extends GameState {
         super(stateManager);
         tm = new TileManager("tile/map.xml");
         font = new Font("font/font.png",10,10);
-        jerry = new Jerry(new Sprite("entity/jerry_animation_4.png"), new Vector2f(400,400), 32);
+        jerry = new Jerry(new Sprite("entity/jerry_animation_5.png"), new Vector2f(50,50), 32);
         tom = new Tom(new Sprite("entity/tom_animation_3.png"), new Vector2f(400,400), 64);
     }
 
