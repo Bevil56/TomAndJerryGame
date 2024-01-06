@@ -2,7 +2,7 @@ package utils;
 
 import entity.Entity;
 
-public class    AABB {
+public class AABB {
     private Vector2f pos;
     private float xOffset;
     private float yOffset;
@@ -71,10 +71,10 @@ public class    AABB {
         this.yOffset = yOffset;
     }
     public boolean collides(AABB bBox){
-        float ax = ((pos.getWorldVar().x)+(xOffset)+(width / 2));
-        float ay = ((pos.getWorldVar().y)+(yOffset)+(height / 2));
-        float bx = ((bBox.pos.getWorldVar().x)+(bBox.xOffset / 2)+(width / 2));
-        float by = ((bBox.pos.getWorldVar().y)+(bBox.yOffset / 2)+(height / 2));
+        float ax = ((pos.x)+(xOffset)+(width / 2));
+        float ay = ((pos.y)+(yOffset)+(height / 2));
+        float bx = ((bBox.getPos().x)+(bBox.getXOffset() / 2)+(width / 2));
+        float by = ((bBox.getPos().y)+(bBox.getYOffset() / 2)+(height / 2));
 
         if(Math.abs(ax - bx) < (this.width / 2) + (bBox.width / 2) ){
             if(Math.abs(ay - by) < (this.height / 2) + (bBox.height / 2) ){

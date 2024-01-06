@@ -35,6 +35,8 @@ public abstract class Block {
     public abstract BufferedImage getImage();
     public Vector2f getPos() { return pos; }
 
+    public abstract boolean isWalkable(AABB p);
+
     public void render(Graphics2D g) {
         g.drawImage(img, (int) pos.x, (int) pos.y, w, h, null);
     }

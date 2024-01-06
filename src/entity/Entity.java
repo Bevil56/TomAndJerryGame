@@ -2,7 +2,9 @@ package entity;
 
 import graphics.Animation;
 import graphics.Sprite;
+import tile.TileManager;
 import utils.*;
+import utils.pathfinder.PointTile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -41,18 +43,20 @@ public abstract class Entity {
     protected AABB hitBounds;
     protected AABB bounds;
     protected TileCollision tileCollision;
+    protected PointTile point;
 
-    public Entity(Sprite sprite, Vector2f vector2f, int size) {
+    public Entity(Sprite sprite, Vector2f pos, int size) {
         this.sprite = sprite;
-        pos = vector2f;
+        this.pos = pos;
         this.size = size;
 
-        bounds = new AABB(vector2f, size, size);
-        hitBounds = new AABB(new Vector2f(vector2f.x + ((float) size / 2), vector2f.y), size, size);
+        bounds = new AABB(pos, size, size);
+        hitBounds = new AABB(new Vector2f(pos.x + ((float) size / 2), pos.y), size, size);
 
         animation = new Animation();
         setAnimation(DOWN,sprite.getSpriteArray(DOWN),10);
 
+        point = new PointTile(this, dx, dy);
         tileCollision = new TileCollision(this);
     }
 
@@ -156,4 +160,7 @@ public abstract class Entity {
     public void input(MouseHandler mouse, KeyHandler key) {
 
     }
+    public PointTile getPoint(){
+        return point;
+    };
 }

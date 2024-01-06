@@ -11,11 +11,16 @@ import java.util.Objects;
 public class Sprite {
     private BufferedImage spriteSheet = null;
     private BufferedImage[][] spriteArray;
-    private int tileSize;
+
+    private int tileSize = 32;
     private int width;
     private int height;
     private int spriteWidth;
     private int spriteHeight;
+
+    private static Font currentFont;
+
+
     public Sprite(String file){
         System.out.println("Loading: " + file +"...");
         spriteSheet = loadSpriteSheet(file);
@@ -95,11 +100,29 @@ public class Sprite {
     public BufferedImage getSprite(int x,int y){
         return spriteSheet.getSubimage(x * width, y * height , width , height);
     }
+    public BufferedImage getSprite(){
+        return spriteSheet.getSubimage(0, 0, width , height);
+    }
     public  BufferedImage[] getSpriteArray(int i){
         return spriteArray[i];
     }
     public BufferedImage[][] getSpriteArray2D(int i){
         return spriteArray;
+    }
+    public static void drawArray(Graphics2D g2D, String word, Vector2f pos, int size) {
+        drawSprite(g2D, currentFont, word, pos, size, size, size, 0);
+    }
+
+    public static void drawArray(Graphics2D g2D, String word, Vector2f pos, int size, int xOffset) {
+        drawSprite(g2D, currentFont, word, pos, size, size, xOffset, 0);
+    }
+
+    public static void drawArray(Graphics2D g2D, String word, Vector2f pos, int width, int height, int xOffset) {
+        drawSprite(g2D, currentFont, word, pos, width, height, xOffset, 0);
+    }
+
+    public static void drawArray(Graphics2D g2D, Font font, String word, Vector2f pos, int size, int xOffset) {
+        drawSprite(g2D, font, word, pos, size, size, xOffset, 0);
     }
     public static void drawSprite(Graphics2D g2D, ArrayList<BufferedImage>  img, Vector2f pos, int width, int height, int xOffset, int yOffset ){
         float x = pos.x;
@@ -116,6 +139,9 @@ public class Sprite {
     public static void drawSprite(Graphics2D g2D, Font font, String word, Vector2f pos, int width, int height, int xOffset, int yOffset ){
         float x = pos.x;
         float y = pos.y;
+
+        currentFont = font;
+
         for (int i = 0; i < word.length();  i++){
             if(word.charAt(i) != 32){
                 g2D.drawImage(font.getFont(word.charAt(i)), (int) x, (int) y, width, height, null );

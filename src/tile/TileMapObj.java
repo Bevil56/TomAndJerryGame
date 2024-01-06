@@ -7,15 +7,17 @@ import tile.blocks.HoleBlock;
 import tile.blocks.ObjBlock;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TileMapObj extends TileMap {
 
     public static HashMap<String, Block> tmo_blocks;
-
+    public ArrayList<Block> blocks;
 
 
     public TileMapObj(String data, Sprite sprite, int width, int height, int tileWidth, int tileHeight, int tileColumns) {
+        blocks = new ArrayList<Block>();
         tmo_blocks = new HashMap<String, Block>();
 
         String[] block = data.split(",");
@@ -43,6 +45,7 @@ public class TileMapObj extends TileMap {
                         );
                     }
                     tmo_blocks.put(i + "," + j, tempBlock);
+                    blocks.addAll(tmo_blocks.values());
                 }
             }
         }
@@ -61,5 +64,10 @@ public class TileMapObj extends TileMap {
         for (Block block: tmo_blocks.values()){
             block.render(g2D);
         }
+    }
+
+    @Override
+    public ArrayList<Block> getBlocks() {
+        return blocks;
     }
 }

@@ -5,6 +5,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import utils.pathfinder.Grid;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,6 +16,13 @@ import java.util.Objects;
 
 public class TileManager {
     public static ArrayList<TileMap> tm;
+
+    private int width = 0;
+    private int height = 0;
+
+    protected static boolean[][] walkableTiles;
+    protected static Grid grid;
+
     public TileManager() {
         tm = new ArrayList<TileMap>();
     }
@@ -32,11 +40,8 @@ public class TileManager {
     private void addTileMap(String path, int blockWidth, int blockHeight) {
         String imagePath;
 
-        int width = 0;
-        int height = 0;
         int tileWidth;
         int tileHeight;
-        int tileCount;
         int tileColumns;
         int layers = 0;
 
@@ -57,7 +62,6 @@ public class TileManager {
             imagePath = eElement.getAttribute("name");
             tileWidth = Integer.parseInt(eElement.getAttribute("tilewidth"));
             tileHeight = Integer.parseInt(eElement.getAttribute("tileheight"));
-            tileCount = Integer.parseInt(eElement.getAttribute("tilecount"));
             tileColumns = Integer.parseInt(eElement.getAttribute("columns"));
 
 
@@ -78,13 +82,12 @@ public class TileManager {
 //                System.out.println(imagePath + " " + width + " " + height + " " + tileCount + " " + tileColumns + " " +layers);
 //                System.out.println("--------------------------------\n" + data[i]);
 
+//                System.out.println("data["+ i + "]=" + data[i]);
 
                 if(i >= 1) {
-                    tm.add(new TileMapNorm(data[i], sprite, width, height, blockWidth, blockHeight, tileColumns));
-                }
+                    tm.add(new TileMapNorm(data[i], sprite, width, height, blockWidth, blockHeight, tileColumns,i));}
                 else {
-                    tm.add(new TileMapObj(data[i], sprite, width, height, blockWidth, blockHeight, tileColumns));
-                }
+                    tm.add(new TileMapObj(data[i], sprite, width, height, blockWidth, blockHeight, tileColumns));}
             }
 
         } catch (Exception e) {
@@ -94,9 +97,30 @@ public class TileManager {
         }
     }
     public void render(Graphics2D g2D) {
+//        System.out.println("Walkable tiles:");
+//        for (int j = 0; j < getGrid().getWalkableTiles()[0].length; j++) {
+//            for (int i = 0; i < getGrid().getWalkableTiles().length; i++) {
+//                System.out.print(getGrid().getWalkableTiles()[i][j] ? "1 " : "0 ");
+//            }
+//            System.out.println();
+//        }
         for (int i = 0; i < tm.size(); i++) {
             tm.get(i).render(g2D);
         }
+    }
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    public static boolean[][] getWalkableTiles() {
+        return TileMapNorm.getWalkableTiles();
+    }
+
+    public static Grid getGrid() {
+        return TileMapNorm.getGrid();
     }
 }
 

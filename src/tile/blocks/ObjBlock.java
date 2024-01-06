@@ -29,9 +29,15 @@ public class ObjBlock extends Block {
     public BufferedImage getImage() {
         return null;
     }
+
+    @Override
+    public boolean isWalkable(AABB p) {
+        return false;
+    }
+
     public void render(Graphics2D g2D){
         super.render(g2D);
-//        g2D.setColor(Color.RED);
-//        g2D.drawRect((int) pos.x, (int) pos.y, w, h);
+        g2D.setColor(Color.RED);
+        g2D.drawRect((int) pos.x, (int) pos.y, w, h);
     }
 }

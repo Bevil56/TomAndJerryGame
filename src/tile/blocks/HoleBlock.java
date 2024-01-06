@@ -13,7 +13,6 @@ public class HoleBlock extends Block {
 
     @Override
     public boolean update(AABB p) {
-        System.out.println("I am a hole");
         return false;
     }
 
@@ -30,9 +29,15 @@ public class HoleBlock extends Block {
     public BufferedImage getImage() {
         return null;
     }
+
+    @Override
+    public boolean isWalkable(AABB p) {
+        return false;
+    }
+
     public void render(Graphics2D g2D){
         super.render(g2D);
-//        g2D.setColor(Color.GREEN);
-//        g2D.drawRect((int) pos.x, (int) pos.y, w, h);
+        g2D.setColor(Color.GREEN);
+        g2D.drawRect((int) pos.x, (int) pos.y, w, h);
     }
 }
