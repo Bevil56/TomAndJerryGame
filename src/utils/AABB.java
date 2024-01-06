@@ -19,10 +19,9 @@ public class    AABB {
 
         size  = Math.max(width, height);
     }
-    public AABB(Vector2f pos, int radius, Entity entity){
+    public AABB(Vector2f pos, int radius){
         this.pos = pos;
         this.radius = radius;
-        this.entity = entity;
 
         size = radius;
     }
@@ -85,14 +84,16 @@ public class    AABB {
         return false;
     }
     public boolean colCirBox(AABB aBox){
-        float cx = (float) (pos.getWorldVar().x + radius / Math.sqrt(2) - entity.getSize() / Math.sqrt(2));
-        float cy = (float) (pos.getWorldVar().y + radius / Math.sqrt(2) - entity.getSize() / Math.sqrt(2));
+        float dx = Math.max(aBox.getPos().x + aBox.getXOffset() , Math.min(aBox.getPos().x + (radius / 2), aBox.getPos().x + aBox.getXOffset() + aBox.getWidth()));
+        float dy = Math.max(aBox.getPos().y + aBox.getYOffset() , Math.min(aBox.getPos().y + (radius / 2), aBox.getPos().y + aBox.getYOffset() + aBox.getHeight()));
 
-        float xDelta = cx -  Math.max(aBox.pos.getWorldVar().x + (aBox.getWidth() / 2), Math.min(cx, aBox.pos.getWorldVar().x));
-        float yDelta = cy -  Math.max(aBox.pos.getWorldVar().y + (aBox.getHeight() / 2), Math.min(cx, aBox.pos.getWorldVar().y));
+        dx = pos.x + (radius / 2) - dx;
+        dy = pos.y + (radius / 2) - dy;
 
-        if((xDelta * xDelta + yDelta * yDelta) < ((this.radius / Math.sqrt(2) * (this.radius / Math.sqrt(2))))){
-            return true;
+        if((Math.sqrt(dx * dx + dy * dy) < radius / 2)){
+            {
+                return true;
+            }
         }
         return false;
     }

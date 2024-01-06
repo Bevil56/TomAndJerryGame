@@ -36,7 +36,7 @@ public class TileCollision {
             return false;
         }
 
-        else if((nextXt == yt + 1) || nextYt == xt + 1){
+        else if((nextXt == yt + 1) || nextYt == xt + 1 || (nextXt == yt - 1) || nextYt == xt - 1 ){
             if(TileMapObj.tmo_blocks.containsKey(String.valueOf(nextXt) + "," + String.valueOf(nextYt))){
                 if(entity.getBounds().getPos().x > block.getPos().x){
                     entity.setFallen(true);

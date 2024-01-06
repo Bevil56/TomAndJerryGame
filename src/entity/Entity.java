@@ -33,7 +33,7 @@ public abstract class Entity {
     protected float dy;
 
     protected float maxSpeed = 2f;
-    protected float acceleration = 1f;
+    protected float acceleration = 1.5f;
     protected float deceleration = 0.3f;
     protected float diagonalFactor = 0.7071f;
 
@@ -125,7 +125,7 @@ public abstract class Entity {
         }
         else if(fallen){
             if (currentAnimation != FALLEN || animation.getDelay() == -1){
-                setAnimation(FALLEN,sprite.getSpriteArray(FALLEN),5);
+                setAnimation(FALLEN,sprite.getSpriteArray(FALLEN),15);
             }
         }
         else {

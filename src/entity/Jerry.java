@@ -13,10 +13,10 @@ public class Jerry extends Entity{
         super(sprite, vector2f, size);
         bounds.setWidth(10);
         bounds.setHeight(10);
-        bounds.setYOffset(24);
         bounds.setXOffset(10);
+        bounds.setYOffset(24);
     }
-    public void move() {
+    private void move() {
 //        if(up && !left && !right) {
 //            dy -= acceleration;
 //            if(dy < -maxSpeed) {

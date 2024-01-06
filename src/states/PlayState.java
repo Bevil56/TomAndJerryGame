@@ -21,15 +21,18 @@ public class PlayState extends GameState {
 
     public PlayState(GameStateManager stateManager) {
         super(stateManager);
+
         tm = new TileManager("tile/map.xml");
+
         font = new Font("font/font.png",10,10);
+
         jerry = new Jerry(new Sprite("entity/jerry_animation_5.png"), new Vector2f(50,50), 32);
-        tom = new Tom(new Sprite("entity/tom_animation_3.png"), new Vector2f(400,400), 64);
+        tom = new Tom(new Sprite("entity/tom_animation_3.png"), new Vector2f(100,400), 64);
     }
 
     @Override
     public void update() {
-        tom.update();
+        tom.update(jerry);
         jerry.update();
     }
 
