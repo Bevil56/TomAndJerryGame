@@ -1,5 +1,6 @@
 package game;
 
+import audio.Audio;
 import states.GameStateManager;
 import utils.KeyHandler;
 import utils.MouseHandler;
@@ -20,7 +21,6 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread thread;
     private boolean running = false;
 
-    private BufferStrategy bs;
     private BufferedImage img;
     private Graphics2D g2D;
 
@@ -28,11 +28,13 @@ public class GamePanel extends JPanel implements Runnable {
     private KeyHandler key;
 
     private GameStateManager stateManager;
+    private static Audio audio;
+    public static Audio effect;
+
 
     public GamePanel(BufferStrategy bs, int width, int height) {
         GamePanel.width = width;
         GamePanel.height = height;
-        this.bs = bs;
         setPreferredSize(new Dimension(width, height));
         setFocusable(true);
         requestFocus();
@@ -51,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
         img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         g2D = (Graphics2D) img.getGraphics();
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
     }
 
     public void init() {
@@ -60,8 +63,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         mouse = new MouseHandler(this);
         key = new KeyHandler(this);
+        audio = new Audio();
+        effect = new Audio("/audio/effect.wav");
 
-        stateManager = new GameStateManager(g2D);
+        stateManager = new GameStateManager(g2D,audio);
     }
 
     public void run() {

@@ -77,7 +77,7 @@ public class Sprite {
         spriteWidth = spriteSheet.getWidth()/width;
     }
 
-    private BufferedImage loadSpriteSheet(String file) {
+    public BufferedImage loadSpriteSheet(String file) {
         BufferedImage sprite = null;
         try{
             sprite = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(file)));

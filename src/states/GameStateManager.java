@@ -1,5 +1,6 @@
 package states;
 
+import audio.Audio;
 import graphics.Sprite;
 import utils.Vector2f;
 import utils.KeyHandler;
@@ -16,18 +17,21 @@ public class GameStateManager {
 
     public static final int PLAY = 0;
     public static final int MENU = 1;
-    public static final int PAUSE = 2;
-    public static final int GAME_OVER = 3;
+    public static final int GAME_OVER = 2;
+    public static final int WIN = 3;
+    public static final int PAUSE = 4;
 
 
     public static Font font;
     public static Fontf fontf;
     public static Sprite button;
     public static Graphics2D g2D;
+    public static Audio audio;
 
-    public GameStateManager(Graphics2D g2D) {
+    public GameStateManager(Graphics2D g2D, Audio audio) {
         GameStateManager.g2D = g2D;
-        states = new GameState[4];
+        GameStateManager.audio = audio;
+        states = new GameState[5];
 
         font = new Font("font/font.png", 10, 10);
         fontf = new Fontf();
@@ -37,6 +41,7 @@ public class GameStateManager {
         button = new Sprite("ui/buttons.png", 64, 32);
 
         states[MENU] = new MenuState(this);
+        GameStateManager.audio.playSound(MENU);
     }
 
     public void add(int state) {
@@ -45,13 +50,19 @@ public class GameStateManager {
         }
         if (state == PLAY) {
             states[PLAY] = new PlayState(this);
+            GameStateManager.audio.playSound(PLAY);
         } else if (state == MENU) {
             states[MENU] = new MenuState(this);
+            GameStateManager.audio.playSound(MENU);
         } else if (state == PAUSE) {
             states[PAUSE] = new PauseState(this);
         } else if (state == GAME_OVER) {
             states[GAME_OVER] = new GameOverState(this);
-
+            GameStateManager.audio.playSound(GAME_OVER);
+        }
+        else if (state == WIN) {
+            states[WIN] = new WinState(this);
+            GameStateManager.audio.playSound(WIN);
         }
     }
 

@@ -8,8 +8,11 @@ import utils.Vector2f;
 import ui.Button;
 
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,6 +29,8 @@ public class GameOverState extends GameState {
     private Button btnReset;
     private Button btnQuit;
     private Font font;
+    private BufferedImage backgroundImage;
+
 
     private final int COUNT_DOWN = 3;
 
@@ -34,6 +39,12 @@ public class GameOverState extends GameState {
 
         imgButton = GameStateManager.button.getSubimage(0, 0, 121, 26);
         imgHover = GameStateManager.button.getSubimage(0, 29, 122, 28);
+        try {
+            // Sử dụng ClassLoader để đọc ảnh từ resources root
+            backgroundImage = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("ui/background.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         font = new Font("MeatMadness", Font.PLAIN, 48);
         btnReset = new Button("RESTART", imgButton, font, new Vector2f(GamePanel.width / 2, GamePanel.height / 2 - 48), 32, 16);
@@ -78,11 +89,12 @@ public class GameOverState extends GameState {
 
     @Override
     public void render(Graphics2D g2D) {
+        g2D.drawImage(backgroundImage, 0, 0, GamePanel.width, GamePanel.height, null);
         if(showGameOver) {
             Sprite.drawArray(g2D, gameover, new Vector2f(GamePanel.width / 2 - gameover.length() * (64 / 2), GamePanel.height / 2 - 64 / 2), 64, 64, 64);
         }
-
         if(showButtons) {
+            Sprite.drawArray(g2D, "Tom And Jerry" , new Vector2f((float) GamePanel.width / 2 - 128 * 4, 50), 128, 75);
             btnReset.render(g2D);
             btnQuit.render(g2D);
         }

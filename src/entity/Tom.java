@@ -28,13 +28,11 @@ public class Tom extends Entity {
         acceleration = 0.8f;
         maxSpeed = 1f;
         deceleration = 0.05f;
-        sprite.setTileSize(64);
-
         bounds.setWidth(25);
         bounds.setHeight(15);
         bounds.setXOffset(18);
         bounds.setYOffset(45);
-        path = new ArrayList<PointTile>();
+        sprite.setTileSize(64);
     }
 
     public void move() {
@@ -178,27 +176,44 @@ public class Tom extends Entity {
         }
     }
 
-    public void update(Jerry jerry) {
+    public void update(List<Cheese> cheeseList, Jerry jerry) {
+        System.out.println(cheeseList.size());
         super.update();
+        if (!fallen) {
 
-        if (isResting()) {
-            updateRestingState();
-            return;
-        }
-        path = PathFinding.findPath(TileManager.getGrid(), this, jerry, this.getPoint(), jerry.getPoint(), true);
-
-        move();
-        followPath(jerry);
-
-
-        if (!tileCollision.collisionTile(dx, 0)) {
-            if (pos.x + dx >= 0 && pos.x + dx + bounds.getWidth() * 2 <= GamePanel.width) {
-                pos.x += dx;
+            if (isResting()) {
+                updateRestingState();
+                return;
             }
-        }
+            path = PathFinding.findPath(TileManager.getGrid(), this, jerry, this.getPoint(), jerry.getPoint(), true);
+            if (path.size() < 3) {
+                setAcceleration(1.2f);
+                setMaxSpeed(1.9f);
+                setDeceleration(0.1f);
+            } else if (cheeseList.size() < 20) {
+                setAcceleration(1f);
+                setMaxSpeed(1.7f);
+                setDeceleration(0.2f);
+            }
 
-        if (!tileCollision.collisionTile(0, dy)) {
-            pos.y += dy;
+            move();
+            followPath(jerry);
+
+
+            if (!tileCollision.collisionTile(dx, 0)) {
+                if (pos.x + dx >= 0 && pos.x + dx + bounds.getWidth() * 2 <= GamePanel.width) {
+                    pos.x += dx;
+                }
+            }
+
+            if (!tileCollision.collisionTile(0, dy)) {
+                pos.y += dy;
+            }
+        } else {
+            if (animation.hasPlayedOnce()) {
+                startResting();
+                fallen = false;
+            }
         }
     }
 
@@ -240,9 +255,30 @@ public class Tom extends Entity {
         pos.y = 600;
         up = down = left = right = false;
         setAnimation(DOWN, sprite.getSpriteArray(DOWN), 12);
+        acceleration = 0.8f;
+        maxSpeed = 1f;
+        deceleration = 0.05f;
     }
 
     public void stopResting() {
         isResting = false;
+    }
+    public void input(MouseHandler mouse, KeyHandler key) {
+        if (!fallen) {
+            up = key.up.down;
+            down = key.down.down;
+            left = key.left.down;
+            right = key.right.down;
+            if(up && down) {
+                up = false;
+                down = false;
+            }
+            if(right && left) {
+                right = false;
+                left = false;
+            }
+        } else {
+            up = down = left = right = false;
+        }
     }
 }

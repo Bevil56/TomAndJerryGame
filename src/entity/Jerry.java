@@ -1,14 +1,13 @@
 package entity;
 
+import audio.Audio;
 import game.GamePanel;
 import graphics.Sprite;
-import utils.CheeseGenerator;
 import utils.Vector2f;
 import utils.KeyHandler;
 import utils.MouseHandler;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Jerry extends Entity {
@@ -130,9 +129,6 @@ public class Jerry extends Entity {
     }
 
     public void update(List<Cheese> cheeseList, Tom tom) {
-        if(isDead) {
-            System.out.println("Dead!");
-        }
         super.update();
         if (!fallen) {
             move();
@@ -171,6 +167,7 @@ public class Jerry extends Entity {
             if (this.getBounds().collides(cheese.getBounds()) && !cheese.isEaten()) {
                 cheese.eat();
                 this.increaseScore();
+                GamePanel.effect.playSound();
             }
         }
     }

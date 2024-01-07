@@ -1,5 +1,6 @@
 package states;
 
+import audio.Audio;
 import entity.Cheese;
 import entity.Heart;
 import entity.Jerry;
@@ -25,7 +26,6 @@ public class PlayState extends GameState {
     private List<Heart> hearts;
     private List<Cheese> cheeseList;
 
-
     public static Vector2f map;
 
 
@@ -41,11 +41,9 @@ public class PlayState extends GameState {
             hearts.add(new Heart(new Sprite("ui/hearts.png"), new Vector2f(GamePanel.width - 120 + i * 32 + 10, 10), 32));
         }
         jerry = new Jerry(new Sprite("entity/jerry_animation_5.png"), new Vector2f(20, 50), 32);
-        tom = new Tom(new Sprite("entity/tom_animation_3.png"), new Vector2f(20, 600), 64);
-        cheeseList = CheeseGenerator.generateCheese(15);
-        ;
+        tom = new Tom(new Sprite("entity/tom_animation_4.png"), new Vector2f(20, 600), 64);
+        cheeseList = CheeseGenerator.generateCheese(4);
     }
-
     @Override
     public void update() {
         Vector2f.setWorldVar(map.x, map.y);
@@ -54,7 +52,11 @@ public class PlayState extends GameState {
                 stateManager.add(GameStateManager.GAME_OVER);
                 stateManager.pop(GameStateManager.PLAY);
             }
-            tom.update(jerry);
+            else if(cheeseList.isEmpty()) {
+                stateManager.add(GameStateManager.WIN);
+                stateManager.pop(GameStateManager.PLAY);
+            }
+            tom.update(cheeseList,jerry);
             jerry.update(cheeseList,tom);
         }
     }
