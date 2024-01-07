@@ -70,19 +70,22 @@ public class AABB {
     public void setYOffset(float yOffset) {
         this.yOffset = yOffset;
     }
-    public boolean collides(AABB bBox){
-        float ax = ((pos.x)+(xOffset)+(width / 2));
-        float ay = ((pos.y)+(yOffset)+(height / 2));
-        float bx = ((bBox.getPos().x)+(bBox.getXOffset() / 2)+(width / 2));
-        float by = ((bBox.getPos().y)+(bBox.getYOffset() / 2)+(height / 2));
+    public boolean collides(AABB bBox) {
+        float centerX = pos.x + xOffset + width / 2;
+        float centerY = pos.y + yOffset + height / 2;
 
-        if(Math.abs(ax - bx) < (this.width / 2) + (bBox.width / 2) ){
-            if(Math.abs(ay - by) < (this.height / 2) + (bBox.height / 2) ){
-                return true;
-            }
-        }
-        return false;
+        float otherMinX = bBox.getPos().x + bBox.getXOffset();
+        float otherMaxX = bBox.getPos().x + bBox.getXOffset() + bBox.getWidth();
+        float otherMinY = bBox.getPos().y + bBox.getYOffset();
+        float otherMaxY = bBox.getPos().y + bBox.getYOffset() + bBox.getHeight();
+
+        return centerX < otherMaxX &&
+                centerX + width > otherMinX &&
+                centerY < otherMaxY &&
+                centerY + height > otherMinY;
     }
+
+
     public boolean colCirBox(AABB aBox){
         float dx = Math.max(aBox.getPos().x + aBox.getXOffset() , Math.min(aBox.getPos().x + (radius / 2), aBox.getPos().x + aBox.getXOffset() + aBox.getWidth()));
         float dy = Math.max(aBox.getPos().y + aBox.getYOffset() , Math.min(aBox.getPos().y + (radius / 2), aBox.getPos().y + aBox.getYOffset() + aBox.getHeight()));

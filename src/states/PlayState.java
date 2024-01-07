@@ -31,7 +31,7 @@ public class PlayState extends GameState {
         font = new Font("font/font.png",10,10);
 
         jerry = new Jerry(new Sprite("entity/jerry_animation_5.png"), new Vector2f(20,50), 32);
-        tom = new Tom(new Sprite("entity/tom_animation_3.png"), new Vector2f(1000,300), 64);
+        tom = new Tom(new Sprite("entity/tom_animation_3.png"), new Vector2f(20,600), 64);
         cheese = new Cheese(new Sprite("item/cheese.png"), new Vector2f( 30,100 ), 32);
     }
 
@@ -56,7 +56,5 @@ public class PlayState extends GameState {
         jerry.render(g2D);
         tom.render(g2D);
         cheese.render(g2D);
-        Sprite.drawArray(g2D, font, "width:" + tm.getWidth(), new Vector2f(300,10),20,15);
-        Sprite.drawArray(g2D, font, "heigth:" + tm.getHeight(), new Vector2f(200,10),20,15);
     }
 }

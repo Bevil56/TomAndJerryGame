@@ -48,24 +48,4 @@ public class TileCollision {
         entity.setFallen(false);
         return false;
     }
-    public boolean collisionNextTile(float ax, float ay){
-        for (int c = 0; c < 4 ; c++){
-            int xt = (int) ((entity.getBounds().getPos().x + ax) + (c % 2) * entity.getBounds().getWidth() + entity.getBounds().getXOffset()) / 32;
-            int yt = (int) ((entity.getBounds().getPos().y + ay) + (int)(c / 2) * entity.getBounds().getHeight() + entity.getBounds().getYOffset()) / 32;
-
-            int nextXt = (int) (((entity.getBounds().getPos().x + ax) + entity.getBounds().getXOffset()) / 32 + entity.getBounds().getWidth() / 32);
-            int nextYt = (int) (((entity.getBounds().getPos().y + ay) + entity.getBounds().getYOffset()) / 32 + entity.getBounds().getHeight() / 32);
-
-
-            if((nextXt == yt + 1) || nextYt == xt + 1 || (nextXt == yt - 1) || nextYt == xt - 1 ) {
-                if (TileMapObj.tmo_blocks.containsKey(String.valueOf(nextXt) + "," + String.valueOf(nextYt))) {
-                    if (entity.getBounds().getPos().x > block.getPos().x) {
-                        entity.setFallen(true);
-                    }
-                    return false;
-                }
-            }
-        }
-        return false;
-    }
 }

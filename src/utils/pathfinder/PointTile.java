@@ -45,6 +45,10 @@ public class PointTile {
         this.y = y;
         return this;
     }
+    public void update(Entity entity, float dx, float dy) {
+        this.x = (int) ((entity.getBounds().getPos().x + dx) + entity.getBounds().getWidth() / 2 + entity.getBounds().getXOffset()) / 32;
+        this.y = (int) ((entity.getBounds().getPos().y + dy) + entity.getBounds().getHeight() / 2 + entity.getBounds().getYOffset()) / 32;
+    }
 
     @Override
     public String toString() {

@@ -138,12 +138,12 @@ public class Jerry extends Entity{
         }
     }
 
-    private void resetPosition() {
+    public void resetPosition() {
         System.out.println("Reseting Player...");
-        pos.x = 50;
+        pos.x = 20;
         pos.y = 50;
 
-        setAnimation(DOWN,sprite.getSpriteArray(DOWN),8);
+        setAnimation(DOWN,sprite.getSpriteArray(DOWN),12);
     }
 
     @Override

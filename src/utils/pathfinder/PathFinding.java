@@ -12,8 +12,8 @@ public class PathFinding {
         grid.setNodes();
         startPos = entity.getPoint();
         targetPos = targetEntity.getPoint();
-        System.out.println(startPos.x+" "+startPos.y);
-        System.out.println(targetPos.x+" "+targetPos.y);
+//        System.out.println(startPos.x+" "+startPos.y);
+//        System.out.println(targetPos.x+" "+targetPos.y);
         List<Node> pathInNodes = findPathNodes(grid, startPos, targetPos, allowDiagonals);
 
         List<PointTile> pathInPointTiles = new ArrayList<PointTile>();

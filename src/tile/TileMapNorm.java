@@ -48,7 +48,7 @@ import java.util.ArrayList;
                             Block normBlock = new NormBlock(sprite.getSprite((temp - 1) % tileColumns, (temp - 1) / tileColumns),
                                     new Vector2f(i * tileWidth, j * tileHeight), tileWidth, tileHeight);
                             blocks.add(normBlock);
-                            walkableTiles[i][j] = true;
+                            walkableTiles[i][j] = false;
                         }
                     }
                 }
