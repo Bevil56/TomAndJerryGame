@@ -1,6 +1,6 @@
 package utils.pathfinder;
 
-public class Node {
+public class NodeTile {
     protected boolean walkable;
     protected int x;
     protected int y;
@@ -8,9 +8,9 @@ public class Node {
 
     protected int gCost;
     protected int hCost;
-    protected Node parent;
+    protected NodeTile parent;
 
-    public Node(int x, int y, float price) {
+    public NodeTile(int x, int y, float price) {
         walkable = price != 0.0f;
         this.price = price;
         this.x = x;
