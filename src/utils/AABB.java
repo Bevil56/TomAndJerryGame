@@ -70,6 +70,23 @@ public class AABB {
     public void setYOffset(float yOffset) {
         this.yOffset = yOffset;
     }
+
+    public boolean inside(int xp, int yp) {
+        if(xp == -1 || yp == - 1) return false;
+
+        int wTemp = (int) this.width;
+        int hTemp = (int) this.height;
+        int x = (int) this.pos.x;
+        int y = (int) this.pos.y;
+
+        if(xp < x || yp < y) {
+            return false;
+        }
+
+        wTemp += x;
+        hTemp += y;
+        return ((wTemp < x || wTemp > xp) && (hTemp < y || hTemp > yp));
+    }
     public boolean collides(AABB bBox) {
         float thisCenterX = pos.x + xOffset + width / 2;
         float thisCenterY = pos.y + yOffset + height / 2;

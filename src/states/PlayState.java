@@ -43,14 +43,25 @@ public class PlayState extends GameState {
     @Override
     public void update() {
         Vector2f.setWorldVar(map.x, map.y);
-        tom.update(jerry);
-        jerry.update(cheeseList);
+        if (!stateManager.getState(GameStateManager.PAUSE)) {
+            tom.update(jerry);
+            jerry.update(cheeseList);
+        }
     }
 
     @Override
     public void input(MouseHandler mouse, KeyHandler key) {
+        key.escape.tick();
         jerry.input(mouse, key);
 //        tom.input(mouse, key);
+        if (key.escape.clicked) {
+            if (stateManager.getState(GameStateManager.PAUSE)) {
+                stateManager.pop(GameStateManager.PAUSE);
+            }
+            else {
+                stateManager.add(GameStateManager.PAUSE);
+            }
+        }
     }
 
     @Override

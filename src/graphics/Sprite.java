@@ -109,6 +109,9 @@ public class Sprite {
     public BufferedImage[][] getSpriteArray2D(int i){
         return spriteArray;
     }
+    public BufferedImage getSubimage(int x, int y, int w, int h) {
+        return spriteSheet.getSubimage(x, y, w, h);
+    }
     public static void drawArray(Graphics2D g2D, String word, Vector2f pos, int size) {
         drawSprite(g2D, currentFont, word, pos, size, size, size, 0);
     }

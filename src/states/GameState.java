@@ -6,7 +6,7 @@ import utils.MouseHandler;
 import java.awt.*;
 
 public abstract class GameState {
-    private GameStateManager stateManager;
+    protected GameStateManager stateManager;
 
     public GameState(GameStateManager stateManager) {
         this.stateManager = stateManager;

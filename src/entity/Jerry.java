@@ -181,11 +181,18 @@ public class Jerry extends Entity {
             down = key.down.down;
             left = key.left.down;
             right = key.right.down;
+            if(up && down) {
+                up = false;
+                down = false;
+            }
+            if(right && left) {
+                right = false;
+                left = false;
+            }
         } else {
             up = down = left = right = false;
         }
     }
-
     public int getScore() {
         return score;
     }

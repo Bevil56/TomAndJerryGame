@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
         mouse = new MouseHandler(this);
         key = new KeyHandler(this);
 
-        stateManager = new GameStateManager();
+        stateManager = new GameStateManager(g2D);
     }
 
     public void run() {
