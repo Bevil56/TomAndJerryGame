@@ -26,8 +26,8 @@ public class Cheese extends Item {
 
     @Override
     public void render(Graphics2D g2D) {
-        g2D.setColor(Color.WHITE);
-        g2D.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
+//        g2D.setColor(Color.WHITE);
+//        g2D.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
         g2D.drawImage(sprite.getSprite(), (int) (pos.x), (int) (pos.y), size, size, null);
     }
 

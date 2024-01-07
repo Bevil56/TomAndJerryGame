@@ -13,6 +13,8 @@ import java.util.List;
 
 public class Jerry extends Entity {
     private int score;
+    private int lives;
+    private boolean isDead;
 
     public Jerry(Sprite sprite, Vector2f vector2f, int size) {
         super(sprite, vector2f, size);
@@ -21,6 +23,8 @@ public class Jerry extends Entity {
         bounds.setXOffset(10);
         bounds.setYOffset(24);
         score = 0;
+        lives = 3;
+        isDead = false;
     }
 
     private void move() {
@@ -125,7 +129,10 @@ public class Jerry extends Entity {
         }
     }
 
-    public void update(List<Cheese> cheeseList) {
+    public void update(List<Cheese> cheeseList, Tom tom) {
+        if(isDead) {
+            System.out.println("Dead!");
+        }
         super.update();
         if (!fallen) {
             move();
@@ -142,16 +149,20 @@ public class Jerry extends Entity {
         } else {
             if (animation.hasPlayedOnce()) {
                 resetPosition();
+                tom.startResting();
                 fallen = false;
             }
         }
     }
 
     public void resetPosition() {
-        System.out.println("Reseting Player...");
+//        System.out.println("Reseting Player...");
         pos.x = 20;
         pos.y = 50;
-
+        lives--;
+        if(lives == 0) {
+            isDead = true;
+        }
         setAnimation(DOWN, sprite.getSpriteArray(DOWN), 12);
     }
 
@@ -170,8 +181,8 @@ public class Jerry extends Entity {
 
     @Override
     public void render(Graphics2D g2D) {
-        g2D.setColor(Color.BLUE);
-        g2D.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
+//        g2D.setColor(Color.BLUE);
+//        g2D.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
         g2D.drawImage(animation.getImage(), (int) (pos.x), (int) (pos.y), size, size, null);
     }
 
@@ -195,5 +206,10 @@ public class Jerry extends Entity {
     }
     public int getScore() {
         return score;
+    }
+    public int getLives(){return lives;}
+
+    public boolean isDead() {
+        return isDead;
     }
 }

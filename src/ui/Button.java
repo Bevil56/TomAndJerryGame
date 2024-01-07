@@ -81,7 +81,7 @@ public class Button {
         this.label = label;
 
         this.image = createButton(label, image, font, width + buttonWidth, height + buttonHeight, buttonWidth, buttonHeight);
-        this.iPos = new Vector2f(pos.x - this.image.getWidth() / 2, pos.y - this.image.getHeight() / 2);
+        this.iPos = new Vector2f(pos.x - (float) this.image.getWidth() / 2, pos.y - (float) this.image.getHeight() / 2);
         this.bounds = new AABB(iPos, this.image.getWidth(), this.image.getHeight());
 
 

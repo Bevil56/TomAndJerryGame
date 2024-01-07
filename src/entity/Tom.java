@@ -206,32 +206,31 @@ public class Tom extends Entity {
     public void render(Graphics2D g2D) {
 
         g2D.setColor(Color.BLUE);
-        if (!path.isEmpty()) {
-            for (PointTile point : path) {
-                int renderX = point.x * 32;
-                int renderY = point.y * 32;
-                g2D.drawRect(renderX, renderY, 32, 32);
-            }
-        }
-        g2D.setColor(Color.GREEN);
-        g2D.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
-
+//        if (!path.isEmpty()) {
+//            for (PointTile point : path) {
+//                int renderX = point.x * 32;
+//                int renderY = point.y * 32;
+//                g2D.drawRect(renderX, renderY, 32, 32);
+//            }
+//        }
+//        g2D.setColor(Color.GREEN);
+//        g2D.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
 
         g2D.drawImage(animation.getImage(), (int) (pos.x), (int) (pos.y), size, size, null);
     }
 
-    private boolean isResting() {
+    public boolean isResting() {
         return isResting;
     }
 
-    private void updateRestingState() {
+    public void updateRestingState() {
         long currentTime = System.currentTimeMillis();
         if (currentTime - restingStartTime >= RESTING_DURATION * 1000) {
             stopResting();
         }
     }
 
-    private void startResting() {
+    public void startResting() {
         isResting = true;
         restingStartTime = System.currentTimeMillis();
         path.clear();
@@ -243,7 +242,7 @@ public class Tom extends Entity {
         setAnimation(DOWN, sprite.getSpriteArray(DOWN), 12);
     }
 
-    private void stopResting() {
+    public void stopResting() {
         isResting = false;
     }
 }

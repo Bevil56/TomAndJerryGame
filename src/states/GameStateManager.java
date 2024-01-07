@@ -22,7 +22,6 @@ public class GameStateManager {
 
     public static Font font;
     public static Fontf fontf;
-    public static Sprite ui;
     public static Sprite button;
     public static Graphics2D g2D;
 
@@ -35,11 +34,9 @@ public class GameStateManager {
         fontf.loadFont("font/Stackedpixel.ttf", "MeatMadness");
         Sprite.currentFont = font;
 
-        ui = new Sprite("ui/ui.png", 32, 32);
         button = new Sprite("ui/buttons.png", 64, 32);
 
-
-        states[PLAY] = new PlayState(this);
+        states[MENU] = new MenuState(this);
     }
 
     public void add(int state) {
@@ -63,7 +60,7 @@ public class GameStateManager {
     }
 
     public void addAndpop(int state) {
-        addAndpop(state, 0);
+        addAndpop(state, 1);
     }
 
     public void addAndpop(int state, int remove) {
@@ -96,7 +93,7 @@ public class GameStateManager {
     ;
 
     public void render(Graphics2D g2D) {
-        g2D.setFont(GameStateManager.fontf.getFont("MeatMadness"));
+        g2D.setFont(GameStateManager.fontf.getFont("font"));
         for (int i = 0; i < states.length; i++) {
             if (states[i] != null) {
                 states[i].render(g2D);

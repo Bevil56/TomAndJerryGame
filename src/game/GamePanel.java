@@ -153,4 +153,7 @@ public class GamePanel extends JPanel implements Runnable {
         g2.drawImage(img, 0, 0, width, height, null);
         g2.dispose();
     }
+    public GameStateManager getGameState() {
+        return stateManager;
+    }
 }

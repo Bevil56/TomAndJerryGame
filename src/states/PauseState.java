@@ -21,11 +21,11 @@ public class PauseState extends GameState {
         BufferedImage imgHover = GameStateManager.button.getSubimage(0, 29, 122, 28);
 
         font = new Font("MeatMadness", Font.PLAIN, 48);
-        btnResume = new Button("RESUME", imgButton, font, new Vector2f(GamePanel.width / 2, GamePanel.height / 2 - 48), 32, 16);
-        btnExit = new Button("EXIT", imgButton, font, new Vector2f(GamePanel.width / 2, GamePanel.height / 2 + 48), 32, 16);
+        btnResume = new Button("RESTART", imgButton, font, new Vector2f(GamePanel.width / 2, GamePanel.height / 2 - 48), 32, 16);
+        btnExit = new Button("QUIT", imgButton, font, new Vector2f(GamePanel.width / 2, GamePanel.height / 2 + 48), 32, 16);
 
-        btnResume.addHoverImage(btnResume.createButton("RESUME", imgHover, font, btnResume.getWidth(), btnResume.getHeight(), 32, 20));
-        btnExit.addHoverImage(btnExit.createButton("EXIT", imgHover, font, btnExit.getWidth(), btnExit.getHeight(), 32, 20));
+        btnResume.addHoverImage(btnResume.createButton("RESTART", imgHover, font, btnResume.getWidth(), btnResume.getHeight(), 32, 20));
+        btnExit.addHoverImage(btnExit.createButton("QUIT", imgHover, font, btnExit.getWidth(), btnExit.getHeight(), 32, 20));
 
         btnResume.addEvent(e -> {
             stateManager.pop(GameStateManager.PAUSE);
