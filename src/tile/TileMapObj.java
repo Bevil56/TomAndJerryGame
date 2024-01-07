@@ -61,7 +61,7 @@ public class TileMapObj extends TileMap {
 
     @Override
     public void render(Graphics2D g2D) {
-        for (Block block: tmo_blocks.values()){
+        for (Block block : tmo_blocks.values()) {
             block.render(g2D);
         }
     }

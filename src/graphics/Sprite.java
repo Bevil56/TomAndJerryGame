@@ -18,7 +18,7 @@ public class Sprite {
     private int spriteWidth;
     private int spriteHeight;
 
-    private static Font currentFont;
+    public static Font currentFont;
 
 
     public Sprite(String file){

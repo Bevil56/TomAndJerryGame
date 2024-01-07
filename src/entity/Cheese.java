@@ -12,8 +12,8 @@ public class Cheese extends Item {
 
     public Cheese(Sprite sprite, Vector2f pos, int size) {
         super(sprite, pos, size);
-        bounds.setWidth(12);
-        bounds.setHeight(12);
+        bounds.setWidth(14);
+        bounds.setHeight(14);
         bounds.setXOffset(10);
         bounds.setYOffset(10);
         eaten = false;
@@ -28,8 +28,9 @@ public class Cheese extends Item {
     public void render(Graphics2D g2D) {
         g2D.setColor(Color.WHITE);
         g2D.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
-        g2D.drawImage(sprite.getSprite(),(int) (pos.x), (int) (pos.y), size, size, null);
+        g2D.drawImage(sprite.getSprite(), (int) (pos.x), (int) (pos.y), size, size, null);
     }
+
     public boolean isEaten() {
         return eaten;
     }

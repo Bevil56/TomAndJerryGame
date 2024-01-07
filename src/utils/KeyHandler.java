@@ -20,16 +20,16 @@ public class KeyHandler implements KeyListener {
         }
 
         public void toggle(boolean pressed) {
-            if(pressed != down) {
+            if (pressed != down) {
                 down = pressed;
             }
-            if(pressed) {
+            if (pressed) {
                 presses++;
             }
         }
 
         public void tick() {
-            if(absorbs < presses) {
+            if (absorbs < presses) {
                 absorbs++;
                 clicked = true;
             } else {
@@ -54,28 +54,28 @@ public class KeyHandler implements KeyListener {
     }
 
     public void releaseAll() {
-        for(int i = 0; i < keys.size(); i++) {
+        for (int i = 0; i < keys.size(); i++) {
             keys.get(i).down = false;
         }
     }
 
     public void tick() {
-        for(int i = 0; i < keys.size(); i++) {
+        for (int i = 0; i < keys.size(); i++) {
             keys.get(i).tick();
         }
     }
 
     public void toggle(KeyEvent e, boolean pressed) {
-        if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP ) up.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) down.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) left.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) right.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_SPACE) attack.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_E) menu.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_ENTER) enter.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE) escape.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_F1) f1.toggle(pressed);
-        if(e.getKeyCode() == KeyEvent.VK_SHIFT) shift.toggle(pressed);
+        if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) up.toggle(pressed);
+        if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) down.toggle(pressed);
+        if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) left.toggle(pressed);
+        if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) right.toggle(pressed);
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) attack.toggle(pressed);
+        if (e.getKeyCode() == KeyEvent.VK_E) menu.toggle(pressed);
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) enter.toggle(pressed);
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) escape.toggle(pressed);
+        if (e.getKeyCode() == KeyEvent.VK_F1) f1.toggle(pressed);
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT) shift.toggle(pressed);
     }
 
 

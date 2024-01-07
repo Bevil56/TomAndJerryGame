@@ -11,8 +11,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jerry extends Entity{
+public class Jerry extends Entity {
     private int score;
+
     public Jerry(Sprite sprite, Vector2f vector2f, int size) {
         super(sprite, vector2f, size);
         bounds.setWidth(10);
@@ -21,6 +22,7 @@ public class Jerry extends Entity{
         bounds.setYOffset(24);
         score = 0;
     }
+
     private void move() {
 //        if(up && !left && !right) {
 //            dy -= acceleration;
@@ -122,9 +124,10 @@ public class Jerry extends Entity{
             dx *= diagonalFactor;
         }
     }
-    public void update(List<Cheese> cheeseList){
+
+    public void update(List<Cheese> cheeseList) {
         super.update();
-        if(!fallen) {
+        if (!fallen) {
             move();
             checkJerryCheeseCollision(cheeseList);
             if (!tileCollision.collisionTile(dx, 0)) {
@@ -136,8 +139,8 @@ public class Jerry extends Entity{
             if (!tileCollision.collisionTile(0, dy)) {
                 pos.y += dy;
             }
-        }else{
-            if(animation.hasPlayedOnce()){
+        } else {
+            if (animation.hasPlayedOnce()) {
                 resetPosition();
                 fallen = false;
             }
@@ -149,8 +152,9 @@ public class Jerry extends Entity{
         pos.x = 20;
         pos.y = 50;
 
-        setAnimation(DOWN,sprite.getSpriteArray(DOWN),12);
+        setAnimation(DOWN, sprite.getSpriteArray(DOWN), 12);
     }
+
     public void checkJerryCheeseCollision(List<Cheese> cheeseList) {
         for (Cheese cheese : cheeseList) {
             if (this.getBounds().collides(cheese.getBounds()) && !cheese.isEaten()) {
@@ -168,15 +172,16 @@ public class Jerry extends Entity{
     public void render(Graphics2D g2D) {
         g2D.setColor(Color.BLUE);
         g2D.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
-        g2D.drawImage(animation.getImage(),(int) (pos.x), (int) (pos.y), size, size, null);
+        g2D.drawImage(animation.getImage(), (int) (pos.x), (int) (pos.y), size, size, null);
     }
-    public void input(MouseHandler mouse, KeyHandler key){
-        if(!fallen) {
+
+    public void input(MouseHandler mouse, KeyHandler key) {
+        if (!fallen) {
             up = key.up.down;
             down = key.down.down;
             left = key.left.down;
             right = key.right.down;
-        }else{
+        } else {
             up = down = left = right = false;
         }
     }

@@ -84,10 +84,11 @@ public class TileManager {
 
 //                System.out.println("data["+ i + "]=" + data[i]);
 
-                if(i >= 1) {
-                    tm.add(new TileMapNorm(data[i], sprite, width, height, blockWidth, blockHeight, tileColumns,i));}
-                else {
-                    tm.add(new TileMapObj(data[i], sprite, width, height, blockWidth, blockHeight, tileColumns));}
+                if (i >= 1) {
+                    tm.add(new TileMapNorm(data[i], sprite, width, height, blockWidth, blockHeight, tileColumns, i));
+                } else {
+                    tm.add(new TileMapObj(data[i], sprite, width, height, blockWidth, blockHeight, tileColumns));
+                }
             }
 
         } catch (Exception e) {
@@ -96,6 +97,7 @@ public class TileManager {
             System.exit(0);
         }
     }
+
     public void render(Graphics2D g2D) {
 //        System.out.println("Walkable tiles:");
 //        for (int j = 0; j < getGrid().getWalkableTiles()[0].length; j++) {
@@ -108,6 +110,7 @@ public class TileManager {
             tm.get(i).render(g2D);
         }
     }
+
     public int getWidth() {
         return width;
     }
@@ -115,6 +118,7 @@ public class TileManager {
     public int getHeight() {
         return height;
     }
+
     public static boolean[][] getWalkableTiles() {
         return TileMapNorm.getWalkableTiles();
     }

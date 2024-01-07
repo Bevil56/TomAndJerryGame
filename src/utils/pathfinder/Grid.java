@@ -59,16 +59,22 @@ public class Grid {
     public List<NodeTile> get4Neighbours(NodeTile nodeTile) {
         List<NodeTile> neighbours = new ArrayList<NodeTile>();
 
-        if (nodeTile.y + 1 >= 0 && nodeTile.y + 1  < gridHeight) neighbours.add(nodeTiles[nodeTile.x][nodeTile.y + 1]); // N
-        if (nodeTile.y - 1 >= 0 && nodeTile.y - 1  < gridHeight) neighbours.add(nodeTiles[nodeTile.x][nodeTile.y - 1]); // S
-        if (nodeTile.x + 1 >= 0 && nodeTile.x + 1  < gridHeight) neighbours.add(nodeTiles[nodeTile.x + 1][nodeTile.y]); // E
-        if (nodeTile.x - 1 >= 0 && nodeTile.x - 1  < gridHeight) neighbours.add(nodeTiles[nodeTile.x - 1][nodeTile.y]); // W
+        if (nodeTile.y + 1 >= 0 && nodeTile.y + 1 < gridHeight)
+            neighbours.add(nodeTiles[nodeTile.x][nodeTile.y + 1]); // N
+        if (nodeTile.y - 1 >= 0 && nodeTile.y - 1 < gridHeight)
+            neighbours.add(nodeTiles[nodeTile.x][nodeTile.y - 1]); // S
+        if (nodeTile.x + 1 >= 0 && nodeTile.x + 1 < gridHeight)
+            neighbours.add(nodeTiles[nodeTile.x + 1][nodeTile.y]); // E
+        if (nodeTile.x - 1 >= 0 && nodeTile.x - 1 < gridHeight)
+            neighbours.add(nodeTiles[nodeTile.x - 1][nodeTile.y]); // W
 
         return neighbours;
     }
+
     public static boolean[][] getWalkableTiles() {
         return walkableTiles;
     }
+
     public static int getGridWidth() {
         return gridWidth;
     }
@@ -76,6 +82,7 @@ public class Grid {
     public static int getGridHeight() {
         return gridHeight;
     }
+
     public NodeTile[][] getNodes() {
         return nodeTiles;
     }
@@ -83,7 +90,8 @@ public class Grid {
     public void setNodes() {
         for (int i = 0; i < gridWidth; i++)
             for (int j = 0; j < gridHeight; j++)
-                nodeTiles[i][j] = new NodeTile(i, j, getWalkableTiles()[i][j] ? 1.0f : 0.0f);;
+                nodeTiles[i][j] = new NodeTile(i, j, getWalkableTiles()[i][j] ? 1.0f : 0.0f);
+        ;
 //        for (int i = 0; i < nodeTiles.length; i++) {
 //            for (int j = 0; j < nodeTiles[i].length; j++) {
 //                NodeTile currentNode = nodeTiles[i][j];

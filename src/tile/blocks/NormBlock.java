@@ -25,10 +25,14 @@ public class NormBlock extends Block {
     public BufferedImage getImage() {
         return null;
     }
+
     public boolean isWalkable(AABB p) {
         return true;
-    };
-    public void render(Graphics2D g2D){
+    }
+
+    ;
+
+    public void render(Graphics2D g2D) {
         super.render(g2D);
     }
 }

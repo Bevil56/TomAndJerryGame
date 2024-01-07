@@ -21,7 +21,6 @@ public class Tom extends Entity {
     private List<PointTile> path;
     private boolean isResting = false;
     private long restingStartTime;
-    private PointTile temp;
 
 
     public Tom(Sprite sprite, Vector2f vector2f, int size) {
@@ -92,15 +91,12 @@ public class Tom extends Entity {
             dx *= diagonalFactor;
         }
     }
+
     public void followPath(Jerry jerry) {
-        float targetX = 0, targetY = 0;
         if (path != null && !path.isEmpty()) {
-            if(path.size() == 1){
-                temp = path.get(0);
-            }
             PointTile targetPoint = path.get(0);
-            targetX = targetPoint.x * 32 + 16;
-            targetY = targetPoint.y * 32 + 16;
+            float targetX = targetPoint.x * 32 + 16;
+            float targetY = targetPoint.y * 32 + 16;
             float distanceX = targetX - (pos.x + bounds.getXOffset() + bounds.getWidth() / 2);
             float distanceY = targetY - (pos.y + bounds.getYOffset() + bounds.getHeight() / 2);
 
@@ -139,8 +135,8 @@ public class Tom extends Entity {
 
             }
         } else {
-            targetX = jerry.getBounds().getPos().x;
-            targetY = jerry.getBounds().getPos().y;
+            float targetX = jerry.getBounds().getPos().x;
+            float targetY = jerry.getBounds().getPos().y;
 
 
             float distanceX = targetX - (pos.x + bounds.getXOffset() + bounds.getWidth() / 2);
@@ -175,16 +171,12 @@ public class Tom extends Entity {
                     up = false;
                     down = false;
                 }
-            }
-            else {
+            } else {
                 jerry.resetPosition();
                 startResting();
             }
         }
     }
-
-
-
 
     public void update(Jerry jerry) {
         super.update();
@@ -193,12 +185,10 @@ public class Tom extends Entity {
             updateRestingState();
             return;
         }
-
         path = PathFinding.findPath(TileManager.getGrid(), this, jerry, this.getPoint(), jerry.getPoint(), true);
 
         move();
         followPath(jerry);
-
 
 
         if (!tileCollision.collisionTile(dx, 0)) {
@@ -212,23 +202,24 @@ public class Tom extends Entity {
         }
     }
 
-
     @Override
     public void render(Graphics2D g2D) {
 
         g2D.setColor(Color.BLUE);
-        if(!path.isEmpty()){
-        for (PointTile point : path) {
-            int renderX = point.x * 32;
-            int renderY = point.y * 32;
-            g2D.drawRect(renderX, renderY, 32, 32);
-        }}
+        if (!path.isEmpty()) {
+            for (PointTile point : path) {
+                int renderX = point.x * 32;
+                int renderY = point.y * 32;
+                g2D.drawRect(renderX, renderY, 32, 32);
+            }
+        }
         g2D.setColor(Color.GREEN);
         g2D.drawRect((int) (pos.x + bounds.getXOffset()), (int) (pos.y + bounds.getYOffset()), (int) bounds.getWidth(), (int) bounds.getHeight());
 
 
         g2D.drawImage(animation.getImage(), (int) (pos.x), (int) (pos.y), size, size, null);
     }
+
     private boolean isResting() {
         return isResting;
     }
@@ -249,11 +240,10 @@ public class Tom extends Entity {
         pos.x = 20;
         pos.y = 600;
         up = down = left = right = false;
-        setAnimation(DOWN,sprite.getSpriteArray(DOWN),12);
+        setAnimation(DOWN, sprite.getSpriteArray(DOWN), 12);
     }
 
     private void stopResting() {
         isResting = false;
     }
-
 }
