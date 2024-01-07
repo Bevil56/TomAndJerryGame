@@ -154,7 +154,6 @@ public class Jerry extends Entity{
     public void checkJerryCheeseCollision(List<Cheese> cheeseList) {
         for (Cheese cheese : cheeseList) {
             if (this.getBounds().collides(cheese.getBounds()) && !cheese.isEaten()) {
-                System.out.println("Cheese");
                 cheese.eat();
                 this.increaseScore();
             }

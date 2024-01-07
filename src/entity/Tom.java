@@ -21,7 +21,7 @@ public class Tom extends Entity {
     private List<PointTile> path;
     private boolean isResting = false;
     private long restingStartTime;
-
+    private PointTile temp;
 
 
     public Tom(Sprite sprite, Vector2f vector2f, int size) {
@@ -92,12 +92,15 @@ public class Tom extends Entity {
             dx *= diagonalFactor;
         }
     }
-    public void followPath() {
+    public void followPath(Jerry jerry) {
+        float targetX = 0, targetY = 0;
         if (path != null && !path.isEmpty()) {
+            if(path.size() == 1){
+                temp = path.get(0);
+            }
             PointTile targetPoint = path.get(0);
-            float targetX = targetPoint.x * 32 + 16;
-            float targetY = targetPoint.y * 32 + 16;
-
+            targetX = targetPoint.x * 32 + 16;
+            targetY = targetPoint.y * 32 + 16;
             float distanceX = targetX - (pos.x + bounds.getXOffset() + bounds.getWidth() / 2);
             float distanceY = targetY - (pos.y + bounds.getYOffset() + bounds.getHeight() / 2);
 
@@ -133,17 +136,53 @@ public class Tom extends Entity {
                 }
             } else {
                 path.remove(0);
+
             }
         } else {
-            dx = 0;
-            dy = 0;
-            right = false;
-            left = false;
-            up = false;
-            down = false;
-            setAnimation(DOWN,sprite.getSpriteArray(DOWN),8);
+            targetX = jerry.getBounds().getPos().x;
+            targetY = jerry.getBounds().getPos().y;
+
+
+            float distanceX = targetX - (pos.x + bounds.getXOffset() + bounds.getWidth() / 2);
+            float distanceY = targetY - (pos.y + bounds.getYOffset() + bounds.getHeight() / 2);
+
+            if (!(jerry.getBounds().collides(this.getBounds()))) {
+
+
+                float angle = (float) Math.atan2(distanceY, distanceX);
+
+                dx = (float) (Math.cos(angle) * maxSpeed);
+                dy = (float) (Math.sin(angle) * maxSpeed);
+                double angleInDegrees = Math.toDegrees(angle);
+                if (angleInDegrees >= -45 && angleInDegrees <= 45) {
+                    right = true;
+                    left = false;
+                    up = false;
+                    down = false;
+                } else if (angleInDegrees >= 45 && angleInDegrees <= 135) {
+                    down = true;
+                    up = false;
+                    left = false;
+                    right = false;
+                } else if (angleInDegrees >= -135 && angleInDegrees <= -45) {
+                    up = true;
+                    down = false;
+                    left = false;
+                    right = false;
+                } else {
+                    left = true;
+                    right = false;
+                    up = false;
+                    down = false;
+                }
+            }
+            else {
+                jerry.resetPosition();
+                startResting();
+            }
         }
     }
+
 
 
 
@@ -158,12 +197,9 @@ public class Tom extends Entity {
         path = PathFinding.findPath(TileManager.getGrid(), this, jerry, this.getPoint(), jerry.getPoint(), true);
 
         move();
-        followPath();
+        followPath(jerry);
 
-        if (jerry.getBounds().collides(this.getBounds())) {
-            jerry.resetPosition();
-            startResting();
-        }
+
 
         if (!tileCollision.collisionTile(dx, 0)) {
             if (pos.x + dx >= 0 && pos.x + dx + bounds.getWidth() * 2 <= GamePanel.width) {

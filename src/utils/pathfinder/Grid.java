@@ -27,7 +27,7 @@ public class Grid {
         gridHeight = height;
         Grid.walkableTiles = walkableTiles;
 
-        System.out.println("Walkable tiles:");
+//        System.out.println("Walkable tiles:");
 //        for (int j = 0; j < getWalkableTiles()[0].length; j++) {
 //            for (int i = 0; i < getWalkableTiles().length; i++) {
 //                System.out.print(getWalkableTiles()[i][j] ? "1 " : "0 ");

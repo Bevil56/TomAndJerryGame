@@ -71,19 +71,23 @@ public class AABB {
         this.yOffset = yOffset;
     }
     public boolean collides(AABB bBox) {
-        float centerX = pos.x + xOffset + width / 2;
-        float centerY = pos.y + yOffset + height / 2;
+        float thisCenterX = pos.x + xOffset + width / 2;
+        float thisCenterY = pos.y + yOffset + height / 2;
 
         float otherMinX = bBox.getPos().x + bBox.getXOffset();
-        float otherMaxX = bBox.getPos().x + bBox.getXOffset() + bBox.getWidth();
+        float otherMaxX = otherMinX + bBox.getWidth();
         float otherMinY = bBox.getPos().y + bBox.getYOffset();
-        float otherMaxY = bBox.getPos().y + bBox.getYOffset() + bBox.getHeight();
+        float otherMaxY = otherMinY + bBox.getHeight();
 
-        return centerX < otherMaxX &&
-                centerX + width > otherMinX &&
-                centerY < otherMaxY &&
-                centerY + height > otherMinY;
+        float thisMinX = thisCenterX - width / 2;
+        float thisMaxX = thisCenterX + width / 2;
+        float thisMinY = thisCenterY - height / 2;
+        float thisMaxY = thisCenterY + height / 2;
+
+        return thisMaxX > otherMinX && thisMinX < otherMaxX &&
+                thisMaxY > otherMinY && thisMinY < otherMaxY;
     }
+
 
 
     public boolean colCirBox(AABB aBox){
